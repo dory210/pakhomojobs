@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: url(images/maid.jpg) center / cover no-repeat;
         }
         
         .container {
@@ -43,10 +43,13 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #667eea;
-        }
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
         
         .nav-links {
             display: flex;
