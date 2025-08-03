@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakhomo Jobs - Trusted Help. Right at Your Doorstep.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-content .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .hero-content .location {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .section:nth-child(even) {
+            background: #f8f9ff;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+        
+        /* Platform Overview */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .platform-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .platform-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        .platform-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        /* User Journey */
+        .journey-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .journey-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+        
+        .journey-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .journey-steps {
+            list-style: none;
+        }
+        
+        .journey-steps li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .journey-steps li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(255,255,255,0.2);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .journey-steps {
+            counter-reset: step-counter;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-item .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        .feature-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .tech-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* Goals */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .goal-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+        }
+        
+        .goal-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .journey-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">🏠 Pakhomo Jobs</div>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#journey">How It Works</a></li>
+                <li><a href="#tech">Technology</a></li>
+                <li><a href="#goals">Goals</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Pakhomo Jobs</h1>
+                <p class="tagline">Trusted Help. Right at Your Doorstep.</p>
+                <p class="location">🇲🇼 Serving Malawi - Starting Local, Scaling National</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Find Help Now</a>
+                    <a href="#" class="btn btn-secondary">Join as Worker</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Overview -->
+    <section class="section" id="overview">
+        <div class="container">
+            <h2 class="section-title">What Is Pakhomo Jobs?</h2>
+            <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem;">
+                An online platform connecting <strong>trained domestic and hospitality workers</strong> with 
+                <strong>households, restaurants, lodges, and offices</strong> looking for reliable help.
+            </p>
+            
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <span class="icon">🏠</span>
+                    <h3>For Clients</h3>
+                    <p>Book trusted helpers like maids, cleaners, waiters, or cooks with ease. View profiles, manage schedules, and handle payments securely.</p>
+                </div>
+                <div class="platform-card">
+                    <span class="icon">👩🏾‍🔧</span>
+                    <h3>For Workers</h3>
+                    <p>Find dignified work opportunities, access training resources, and build your reputation through our rating system.</p>
+                </div>
+                <div class="platform-card">
+                    <span class="icon">🛠️</span>
+                    <h3>Admin Backend</h3>
+                    <p>Comprehensive management system for approving workers, handling bookings, managing payments, and ensuring quality.</p>
+                </div>
+                <div class="platform-card">
+                    <span class="icon">📚</span>
+                    <h3>Trust & Education</h3>
+                    <p>Transparent training processes, verification systems, and community guidelines that build trust and safety.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="section" id="features">
+        <div class="container">
+            <h2 class="section-title">Key Website Functionalities</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon">🔎</div>
+                    <h4>Search & Filter</h4>
+                    <p>Find workers by job type, location, gender, and availability</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">📅</div>
+                    <h4>Booking Calendar</h4>
+                    <p>Select time and date slots for jobs with real-time availability</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">💬</div>
+                    <h4>Messaging Integration</h4>
+                    <p>WhatsApp button and internal chat for seamless communication</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🧾</div>
+                    <h4>Secure Payments</h4>
+                    <p>Mobile Money integration with Mpamba and Airtel Money</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">📱</div>
+                    <h4>Mobile Optimized</h4>
+                    <p>100% mobile-first design for the Malawian market</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🌐</div>
+                    <h4>Multi-language</h4>
+                    <p>Chichewa and English toggle for wider accessibility</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Journey -->
+    <section class="section" id="journey">
+        <div class="container">
+            <h2 class="section-title">User Journey Examples</h2>
+            <div class="journey-container">
+                <div class="journey-card">
+                    <h3>👥 Client Journey</h3>
+                    <ol class="journey-steps">
+                        <li>Visits pakhomojobs.com</li>
+                        <li>Clicks "Hire a Maid"</li>
+                        <li>Selects service, enters date/time/location</li>
+                        <li>Chooses from 3 nearby verified workers</li>
+                        <li>Confirms job and pays deposit</li>
+                        <li>Worker arrives → job completed → payment sent</li>
+                    </ol>
+                </div>
+                <div class="journey-card">
+                    <h3>👷‍♀️ Worker Journey</h3>
+                    <ol class="journey-steps">
+                        <li>Signs up via "Join as Worker"</li>
+                        <li>Submits ID and chooses job category</li>
+                        <li>Gets invited to training or materials</li>
+                        <li>Receives first job via SMS/WhatsApp</li>
+                        <li>Completes job → gets rating → earns money</li>
+                        <li>Builds reputation and gets more opportunities</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="section" id="tech">
+        <div class="container">
+            <h2 class="section-title">Recommended Tech Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item">Frontend: React/Next.js</div>
+                <div class="tech-item">Backend: Firebase/Node.js</div>
+                <div class="tech-item">Database: Firestore/MongoDB</div>
+                <div class="tech-item">Hosting: Vercel/Firebase</div>
+                <div class="tech-item">Payments: Mpamba/Airtel Money</div>
+                <div class="tech-item">Future: Stripe Integration</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals -->
+    <section class="section" id="goals">
+        <div class="container">
+            <h2 class="section-title">Website Goals</h2>
+            <div class="goals-grid">
+                <div class="goal-item">
+                    <div class="icon">🎯</div>
+                    <h4>Easy Access to Trusted Help</h4>
+                    <p>Simplify the process of finding reliable domestic and hospitality workers</p>
+                </div>
+                <div class="goal-item">
+                    <div class="icon">💼</div>
+                    <h4>Dignified Job Creation</h4>
+                    <p>Create safe, respectful employment opportunities for informal workers</p>
+                </div>
+                <div class="goal-item">
+                    <div class="icon">⚡</div>
+                    <h4>Streamlined Operations</h4>
+                    <p>Efficient payments, training programs, and feedback systems</p>
+                </div>
+                <div class="goal-item">
+                    <div class="icon">🚀</div>
+                    <h4>Scalable Marketplace</h4>
+                    <p>Build a service platform rooted in Malawian needs with national growth potential</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🏠 Pakhomo Jobs</h4>
+                    <p>Connecting trusted workers with families and businesses across Malawi.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p>Find Help • Join as Worker • How It Works • Contact Us</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📍 Blantyre, Malawi<br>📱 WhatsApp Support<br>📧 info@pakhomojobs.com</p>
+                </div>
+            </div>
+            <p>&copy; 2025 Pakhomo Jobs. Trusted Help. Right at Your Doorstep.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/265" class="whatsapp-btn" title="WhatsApp Support">📱</a>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Add click handlers for CTA buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (this.textContent.includes('Find Help')) {
+                    alert('🎉 Ready to launch! This would redirect to the booking form.');
+                } else if (this.textContent.includes('Join as Worker')) {
+                    alert('👷‍♀️ Worker registration coming soon! This would open the worker sign-up form.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

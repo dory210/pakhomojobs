@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join as Worker - Pakhomo Jobs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+            padding-top: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Language Toggle */
+        .language-toggle {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+        
+        /* Form Container */
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-weight: bold;
+            color: #666;
+        }
+        
+        .step.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .step.completed {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .checkbox-item.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 120px;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #666;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: #4caf50;
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+        }
+        
+        .info-box h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Back to Home */
+        .back-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .back-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+        
+        .back-link a:hover {
+            opacity: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Language specific content */
+        .lang-content {
+            display: none;
+        }
+        
+        .lang-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏠 Join Pakhomo Jobs</h1>
+            <div class="lang-content active" data-lang="en">
+                <p>Start your journey as a trusted worker</p>
+            </div>
+            <div class="lang-content" data-lang="ny">
+                <p>Yambitsani ntchito yanu ngati munthu wodalirika</p>
+            </div>
+        </div>
+
+        <!-- Language Toggle -->
+        <div class="language-toggle">
+            <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+            <button class="lang-btn" onclick="switchLanguage('ny')">Chichewa</button>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <h3>🎉 Application Submitted Successfully!</h3>
+            <p>We've received your application via WhatsApp. Our team will review it and contact you within 48 hours.</p>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container" id="formContainer">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" id="step1">1</div>
+                <div class="step" id="step2">2</div>
+                <div class="step" id="step3">3</div>
+            </div>
+
+            <form id="workerRegistrationForm">
+                <!-- Step 1: Personal Information -->
+                <div class="form-step active" id="formStep1">
+                    <div class="lang-content active" data-lang="en">
+                        <h3>Step 1: Personal Information</h3>
+                    </div>
+                    <div class="lang-content" data-lang="ny">
+                        <h3>Gawo 1: Zambiri Za Inu</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Full Name *</label>
+                        <label class="lang-content" data-lang="ny">Dzina Lathunthu *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Phone Number *</label>
+                        <label class="lang-content" data-lang="ny">Nambala Ya Foni *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+265" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">WhatsApp Number (if different)</label>
+                        <label class="lang-content" data-lang="ny">Nambala Ya WhatsApp (ngati yosiyana)</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="+265">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Gender *</label>
+                        <label class="lang-content" data-lang="ny">Jenda *</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select Gender / Sankhani Jenda</option>
+                            <option value="female">Female / Mkazi</option>
+                            <option value="male">Male / Mwamuna</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Age *</label>
+                        <label class="lang-content" data-lang="ny">Zaka *</label>
+                        <input type="number" id="age" name="age" min="18" max="65" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Location/Area *</label>
+                        <label class="lang-content" data-lang="ny">Malo Omwe Mumakhala *</label>
+                        <input type="text" id="location" name="location" placeholder="e.g., Ndirande, Blantyre" required>
+                    </div>
+                </div>
+
+                <!-- Step 2: Work Preferences -->
+                <div class="form-step" id="formStep2">
+                    <div class="lang-content active" data-lang="en">
+                        <h3>Step 2: Work Preferences</h3>
+                        <div class="info-box">
+                            <h4>What services are you interested in providing?</h4>
+                            <p>Select all that apply. We'll match you with relevant opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="lang-content" data-lang="ny">
+                        <h3>Gawo 2: Ntchito Zomwe Mukufuna</h3>
+                        <div class="info-box">
+                            <h4>Ndi ntchito ziti zomwe mukufuna kuchita?</h4>
+                            <p>Sankhani zonse zomwe mukudziwa. Tidzakupezetsani ntchito zoyenera.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Services You Can Provide *</label>
+                        <label class="lang-content" data-lang="ny">Ntchito Zomwe Mutha Kuchita *</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="houseCleaning" name="services" value="House Cleaning">
+                                <label for="houseCleaning" class="lang-content active" data-lang="en">House Cleaning / Kutsuka Nyumba</label>
+                                <label for="houseCleaning" class="lang-content" data-lang="ny">Kutsuka Nyumba</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="maidService" name="services" value="Maid Service">
+                                <label for="maidService" class="lang-content active" data-lang="en">Maid Service / Wantchito Wanyumba</label>
+                                <label for="maidService" class="lang-content" data-lang="ny">Wantchito Wanyumba</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cooking" name="services" value="Cooking">
+                                <label for="cooking" class="lang-content active" data-lang="en">Cooking / Kuphika</label>
+                                <label for="cooking" class="lang-content" data-lang="ny">Kuphika</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="waitering" name="services" value="Waitering">
+                                <label for="waitering" class="lang-content active" data-lang="en">Waitering / Kutumikira Makasitomala</label>
+                                <label for="waitering" class="lang-content" data-lang="ny">Kutumikira Makasitomala</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="babysitting" name="services" value="Babysitting">
+                                <label for="babysitting" class="lang-content active" data-lang="en">Babysitting / Kusunga Ana</label>
+                                <label for="babysitting" class="lang-content" data-lang="ny">Kusunga Ana</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="laundry" name="services" value="Laundry">
+                                <label for="laundry" class="lang-content active" data-lang="en">Laundry / Kuchapa Zovala</label>
+                                <label for="laundry" class="lang-content" data-lang="ny">Kuchapa Zovala</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="gardening" name="services" value="Gardening">
+                                <label for="gardening" class="lang-content active" data-lang="en">Gardening / Kulima Munda</label>
+                                <label for="gardening" class="lang-content" data-lang="ny">Kulima Munda</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="officeWork" name="services" value="Office Cleaning">
+                                <label for="officeWork" class="lang-content active" data-lang="en">Office Cleaning / Kutsuka Maofesi</label>
+                                <label for="officeWork" class="lang-content" data-lang="ny">Kutsuka Maofesi</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Experience Level *</label>
+                        <label class="lang-content" data-lang="ny">Lusiyo *</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Select Experience / Sankhani Lusiyo</option>
+                            <option value="beginner">Beginner (0-1 years) / Woyamba (0-1 chaka)</option>
+                            <option value="intermediate">Intermediate (2-5 years) / Wapakatikati (2-5 zaka)</option>
+                            <option value="experienced">Experienced (5+ years) / Wodziwa (5+ zaka)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">When are you available? *</label>
+                        <label class="lang-content" data-lang="ny">Ndi nthawi yanji imene muli nayo? *</label>
+                        <select id="availability" name="availability" required>
+                            <option value="">Select Availability / Sankhani Nthawi</option>
+                            <option value="weekdays">Weekdays only / Masiku antchito okha</option>
+                            <option value="weekends">Weekends only / Masiku opuma okha</option>
+                            <option value="anytime">Anytime / Nthawi iliyonse</option>
+                            <option value="flexible">Flexible / Mosinthika</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Step 3: Additional Information -->
+                <div class="form-step" id="formStep3">
+                    <div class="lang-content active" data-lang="en">
+                        <h3>Step 3: Additional Information</h3>
+                    </div>
+                    <div class="lang-content" data-lang="ny">
+                        <h3>Gawo 3: Zambiri Zina</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">National ID Number *</label>
+                        <label class="lang-content" data-lang="ny">Nambala Ya ID *</label>
+                        <input type="text" id="nationalId" name="nationalId" placeholder="e.g., BLN123456789" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Emergency Contact Name</label>
+                        <label class="lang-content" data-lang="ny">Dzina La Munthu Wofunikira</label>
+                        <input type="text" id="emergencyName" name="emergencyName">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Emergency Contact Phone</label>
+                        <label class="lang-content" data-lang="ny">Nambala Ya Munthu Wofunikira</label>
+                        <input type="tel" id="emergencyPhone" name="emergencyPhone" placeholder="+265">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lang-content active" data-lang="en">Tell us about yourself and why you want to join Pakhomo Jobs</label>
+                        <label class="lang-content" data-lang="ny">Tifotokozeni za inu ndi chifukwa chake mukufuna kulowa mu Pakhomo Jobs</label>
+                        <textarea id="aboutYourself" name="aboutYourself" rows="4" placeholder="Share your experience, goals, and motivation..."></textarea>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="lang-content active" data-lang="en">
+                            <h4>What happens next?</h4>
+                            <p>• We'll review your application within 48 hours<br>
+                            • If approved, we'll invite you for training (if needed)<br>
+                            • You'll receive your first job opportunities via SMS/WhatsApp<br>
+                            • Build your reputation and earn money!</p>
+                        </div>
+                        <div class="lang-content" data-lang="ny">
+                            <h4>Chani chidzatsatira?</h4>
+                            <p>• Tidzawona pempho lanu m'masiku awiri<br>
+                            • Ngati tavomera, tidzakuyitanani kuti muphunzire<br>
+                            • Mudzalandira ntchito zoyamba kudzera pa SMS/WhatsApp<br>
+                            • Mangani mbiri yanu ndi kupeza ndalama!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Buttons -->
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" onclick="previousStep()">
+                        <span class="lang-content active" data-lang="en">Previous</span>
+                        <span class="lang-content" data-lang="ny">Choyambirira</span>
+                    </button>
+                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+                        <span class="lang-content active" data-lang="en">Next</span>
+                        <span class="lang-content" data-lang="ny">Chotsatira</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">
+                        <span class="lang-content active" data-lang="en">Submit Application</span>
+                        <span class="lang-content" data-lang="ny">Tumizani Pempho</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="back-link">
+            <a href="index.html">← Back to Pakhomo Jobs Home</a>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        // Language switching
+        function switchLanguage(lang) {
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Show/hide language specific content
+            document.querySelectorAll('.lang-content').forEach(content => {
+                content.classList.remove('active');
+                if (content.dataset.lang === lang) {
+                    content.classList.add('active');
+                }
+            });
+        }
+
+        // Form navigation
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateFormDisplay();
+                }
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateFormDisplay();
+            }
+        }
+
+        function updateFormDisplay() {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Show current step
+            document.getElementById('formStep' + currentStep).classList.add('active');
+
+            // Update step indicators
+            for (let i = 1; i <= totalSteps; i++) {
+                const stepEl = document.getElementById('step' + i);
+                stepEl.classList.remove('active', 'completed');
+                
+                if (i < currentStep) {
+                    stepEl.classList.add('completed');
+                } else if (i === currentStep) {
+                    stepEl.classList.add('active');
+                }
+            }
+
+            // Update buttons
+            document.getElementById('prevBtn').style.display = currentStep === 1 ? 'none' : 'block';
+            document.getElementById('nextBtn').style.display = currentStep === totalSteps ? 'none' : 'block';
+            document.getElementById('submitBtn').style.display = currentStep === totalSteps ? 'block' : 'none';
+        }
+
+        function validateCurrentStep() {
+            const currentStepEl = document.getElementById('formStep' + currentStep);
+            const requiredFields = currentStepEl.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (field.type === 'checkbox') {
+                    // For services checkboxes, at least one must be checked
+                    if (field.name === 'services') {
+                        const checkedServices = document.querySelectorAll('input[name="services"]:checked');
+                        if (checkedServices.length === 0) {
+                            alert('Please select at least one service you can provide.');
+                            isValid = false;
+                        }
+                    }
+                } else if (!field.value.trim()) {
+                    field.style.borderColor = '#ff4444';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                }
+            });
+
+            return isValid;
+        }
+
+        // Checkbox selection styling
+        document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const item = this.closest('.checkbox-item');
+                if (this.checked) {
+                    item.classList.add('selected');
+                } else {
+                    item.classList.remove('selected');
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('workerRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateCurrentStep()) {
+                submitToWhatsApp();
+            }
+        });
+
+        function submitToWhatsApp() {
+            // Collect form data
+            const formData = new FormData(document.getElementById('workerRegistrationForm'));
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    // Handle multiple values (like services)
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+
+            // Get selected services
+            const selectedServices = [];
+            document.querySelectorAll('input[name="services"]:checked').forEach(service => {
+                selectedServices.push(service.value);
+            });
+
+            // Format WhatsApp message
+            const message = `🏠 NEW WORKER APPLICATION - PAKHOMO JOBS
+
+👤 PERSONAL INFORMATION:
+• Name: ${data.fullName || 'Not provided'}
+• Phone: ${data.phone || 'Not provided'}
+• WhatsApp: ${data.whatsapp || data.phone || 'Not provided'}
+• Gender: ${data.gender || 'Not provided'}
+• Age: ${data.age || 'Not provided'}
+• Location: ${data.location || 'Not provided'}
+
+💼 WORK PREFERENCES:
+• Services: ${selectedServices.join(', ') || 'None selected'}
+• Experience: ${data.experience || 'Not provided'}
+• Availability: ${data.availability || 'Not provided'}
+
+📋 ADDITIONAL INFO:
+• National ID: ${data.nationalId || 'Not provided'}
+• Emergency Contact: ${data.emergencyName || 'Not provided'} (${data.emergencyPhone || 'Not provided'})
+• About: ${data.aboutYourself || 'Not provided'}
+
+📅 Applied: ${new Date().toLocaleDateString('en-GB')} at ${new Date().toLocaleTimeString('en-GB')}
+
+Please review and contact applicant for next steps.`;
+
+            // Create WhatsApp URL
+            const phoneNumber = '265988114909'; // Your WhatsApp number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+
+            // Show success message
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+        }
+
+        // Initialize form
+        updateFormDisplay();
+    </script>
+</body>
+</html>
