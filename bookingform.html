@@ -37,6 +37,16 @@
             color: white;
         }
         
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
         .booking-header h1 {
             font-size: 2rem;
             font-weight: 800;
@@ -418,14 +428,32 @@
 <body>
     <div class="booking-container">
         <div class="booking-header">
-            <h1>🏠 Book Your Service</h1>
-            <p>Tell us what you need, and we'll connect you with the perfect helper</p>
+            <a href="index.html" class="logo">🏠 Pakhomo Jobs</a>
+            <p style="margin-top: 1rem;">Tell us what you need, and we'll connect you with the perfect helper</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
         </div>
         
         <div class="form-container">
+           <div class="form-container">
+            <form id="bookingForm" action="https://formspree.io/f/23be1d94-71f1-4fc6-9b54-6f9f494b3522" method="POST">
+                <!-- Hidden fields for form data -->
+                <input type="hidden" name="service_type" id="hiddenServiceType">
+                <input type="hidden" name="specific_requirements" id="hiddenRequirements">
+                <input type="hidden" name="service_duration" id="hiddenServiceDuration">
+                <input type="hidden" name="start_date" id="hiddenStartDate">
+                <input type="hidden" name="hours_per_day" id="hiddenHoursPerDay">
+                <input type="hidden" name="schedule" id="hiddenSchedule">
+                <input type="hidden" name="special_requirements" id="hiddenSpecialRequirements">
+                <input type="hidden" name="additional_details" id="hiddenAdditionalDetails">
+                <input type="hidden" name="name" id="hiddenName">
+                <input type="hidden" name="email" id="hiddenEmail">
+                <input type="hidden" name="phone" id="hiddenPhone">
+                <input type="hidden" name="location" id="hiddenLocation">
+                <input type="hidden" name="address" id="hiddenAddress">
+                <input type="hidden" name="whatsapp_message" id="hiddenWhatsAppMessage">
+
             <!-- Step 1: Service Selection -->
             <div class="form-step active" id="step1">
                 <h2 class="step-title">What service do you need?</h2>
@@ -645,642 +673,263 @@
             <!-- Success Step -->
             <div class="form-step" id="stepSuccess">
                 <div class="success-message">
-                    <div class="success-icon">✅</div>
-                    <h2>Request Submitted Successfully!</h2>
-                    <p>Your service request has been sent to our team. We'll contact you within 2 hours to discuss your requirements and arrange the perfect helper.</p>
-                    
-                    <div style="margin: 2rem 0; padding: 1.5rem; background: #f8f9ff; border-radius: 10px;">
-                        <h3>What happens next?</h3>
-                        <ul style="text-align: left; margin-top: 1rem;">
-                            <li>✓ We'll call you within 2 hours</li>
-                            <li>✓ Interview and select suitable candidates</li>
-                            <li>✓ Arrange meeting with chosen helper</li>
-                            <li>✓ Start service on your preferred date</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="form-buttons">
-                        <button class="btn btn-primary" onclick="location.reload()">
-                            📝 Make Another Request
-                        </button>
-                        <a href="https://wa.me/26590988047133" class="btn btn-secondary">
-                            💬 Chat on WhatsApp
-                        </a>
-                    </div>
+                    <div class="success-icon">🎉</div>
+                    <h2>Booking Request Sent!</h2>
+                    <p>Thank you! Your booking details have been sent. For a faster response and to confirm your booking, please message us on WhatsApp.</p>
+                    <button type="button" class="btn btn-primary" onclick="openWhatsApp()" style="margin-top: 1rem; background: #25D366;">
+                        <svg style="width:20px; height:20px; fill:white; margin-right: 8px;" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.61 15.35 3.48 16.84L2 22L7.32 20.55C8.77 21.33 10.37 21.8 12.04 21.8C17.5 21.8 21.95 17.35 21.95 11.91C21.95 6.45 17.5 2 12.04 2M12.04 20.13C10.56 20.13 9.12 19.7 7.89 18.9L7.5 18.68L4.32 19.53L5.19 16.41L4.95 16.02C4.1 14.68 3.63 13.13 3.63 11.91C3.63 7.33 7.41 3.55 12.04 3.55C16.67 3.55 20.45 7.33 20.45 11.91C20.45 16.49 16.67 20.13 12.04 20.13M17.46 14.47C17.23 14.36 16.13 13.85 15.91 13.77C15.69 13.68 15.53 13.64 15.38 13.86C15.23 14.08 14.76 14.64 14.61 14.82C14.46 14.99 14.31 15.01 14.06 14.92C13.81 14.84 12.9 14.54 11.82 13.63C11.01 12.93 10.45 12.12 10.3 11.87C10.16 11.62 10.26 11.5 10.38 11.38C10.49 11.27 10.62 11.11 10.74 10.96C10.86 10.82 10.91 10.7 11 10.53C11.09 10.36 11.04 10.21 10.97 10.09C10.9 9.97 10.35 8.61 10.13 8.09C9.92 7.57 9.7 7.64 9.56 7.63C9.41 7.63 9.26 7.63 9.11 7.63C8.96 7.63 8.7 7.69 8.48 7.91C8.26 8.13 7.79 8.56 7.79 9.61C7.79 10.66 8.51 11.66 8.63 11.83C8.75 12 10.16 14.16 12.21 15.06C12.94 15.37 13.48 15.52 13.89 15.63C14.53 15.79 15.09 15.75 15.51 15.66C15.98 15.56 17.03 15.01 17.23 14.9C17.43 14.78 17.43 14.67 17.46 14.47Z"></path></svg>
+                        Message us on WhatsApp
+                    </button>
                 </div>
             </div>
-            
-            <!-- Navigation Buttons -->
-            <div class="form-buttons" id="navigationButtons">
-                <button class="btn btn-secondary" id="prevBtn" onclick="previousStep()" style="display: none;">
-                    ← Previous
-                </button>
-                <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">
-                    Next →
-                </button>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        let currentStep = 1;
-        const totalSteps = 5;
-        let formData = {};
-        
-        // Service requirements mapping
-        const serviceRequirements = {
-            domestic: [
-                'House cleaning', 'Laundry & ironing', 'Cooking meals', 'Childcare', 
-                'Elderly care', 'Pet care', 'Garden maintenance', 'Shopping & errands'
-            ],
-            hospitality: [
-                'Waiter/Waitress', 'Kitchen assistant', 'Housekeeping', 'Reception', 
-                'Event service', 'Bar tender', 'Room service', 'Cleaning staff'
-            ],
-            culinary: [
-                'Traditional Malawian dishes', 'International cuisine', 'Meal planning', 
-                'Kitchen management', 'Food preparation', 'Catering events', 'Special diets', 'Baking'
-            ],
-            security: [
-                'Day shift guard', 'Night shift guard', 'Event security', 'Patrol services',
-                'Access control', 'CCTV monitoring', 'Emergency response', 'Property protection'
-            ],
-            driver: [
-                'Personal driver', 'Delivery services', 'Airport transfers', 'Shopping trips',
-                'School runs', 'Business meetings', 'Long distance travel', 'Night driving'
-            ],
-            childcare: [
-                'Babysitting (hourly)', 'Full-time nanny', 'After school care', 'Weekend care',
-                'Night care', 'Educational activities', 'Play supervision', 'Meal preparation for kids'
-            ],
-            office: [
-                'Office cleaning', 'Reception duties', 'File organization', 'Mail handling',
-                'Basic admin tasks', 'Meeting room setup', 'Equipment maintenance', 'Visitor management'
-            ],
-            emergency: [
-                'Immediate cleaning help', 'Last-minute childcare', 'Event staff urgently needed',
-                'Security guard ASAP', 'Driver for emergency', 'Same-day service required'
-            ]
-        };
-        
-        // Price estimates (MWK per month for regular service)
-        const priceEstimates = {
-            domestic: { min: 15000, max: 35000 },
-            hospitality: { min: 20000, max: 45000 },
-            culinary: { min: 25000, max: 50000 },
-            security: { min: 30000, max: 60000 },
-            driver: { min: 35000, max: 70000 },
-            childcare: { min: 20000, max: 40000 },
-            office: { min: 18000, max: 35000 },
-            emergency: { min: 5000, max: 15000 }
-        };
-        
-        // Initialize form
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set minimum date to today
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('startDate').min = today;
-            
-            // Service selection handlers
-            document.querySelectorAll('.service-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.service-option').forEach(opt => opt.classList.remove('selected'));
-                    this.classList.add('selected');
-                    formData.selectedService = this.dataset.service;
-                    
-                    // Show emergency notice if emergency selected
-                    const emergencyNotice = document.getElementById('emergencyNotice');
-                    if (this.dataset.service === 'emergency') {
-                        emergencyNotice.style.display = 'block';
-                    } else {
-                        emergencyNotice.style.display = 'none';
-                    }
-                    
-                    updateNextButton();
-                });
-            });
-            
-            // Form validation
-            const requiredInputs = document.querySelectorAll('input[required], select[required], textarea[required]');
-            requiredInputs.forEach(input => {
-                input.addEventListener('input', updateNextButton);
-                input.addEventListener('change', updateNextButton);
-            });
-        });
-        
-        function nextStep() {
-            if (!validateCurrentStep()) return;
-            
-            if (currentStep < totalSteps) {
-                // Save current step data
-                saveCurrentStepData();
+            </form>
+        </div><div class="form-container">
+            <form id="bookingForm" action="https://formspree.io/f/23be1d94-71f1-4fc6-9b54-6f9f494b3522" method="POST">
+                <!-- Hidden fields for form data -->
+                <input type="hidden" name="service_type" id="hiddenServiceType">
+                <input type="hidden" name="specific_requirements" id="hiddenRequirements">
+                <input type="hidden" name="service_duration" id="hiddenServiceDuration">
+                <input type="hidden" name="start_date" id="hiddenStartDate">
+                <input type="hidden" name="hours_per_day" id="hiddenHoursPerDay">
+                <input type="hidden" name="schedule" id="hiddenSchedule">
+                <input type="hidden" name="special_requirements" id="hiddenSpecialRequirements">
+                <input type="hidden" name="additional_details" id="hiddenAdditionalDetails">
+                <input type="hidden" name="name" id="hiddenName">
+                <input type="hidden" name="email" id="hiddenEmail">
+                <input type="hidden" name="phone" id="hiddenPhone">
+                <input type="hidden" name="location" id="hiddenLocation">
+                <input type="hidden" name="address" id="hiddenAddress">
+                <input type="hidden" name="whatsapp_message" id="hiddenWhatsAppMessage">
+
+            <!-- Step 1: Service Selection -->
+            <div class="form-step active" id="step1">
+                <h2 class="step-title">What service do you need?</h2>
+                <p class="step-subtitle">Select the type of help you're looking for</p>
                 
-                currentStep++;
-                showStep(currentStep);
-                
-                // Special handling for step 2 (specific requirements)
-                if (currentStep === 2) {
-                    populateSpecificRequirements();
-                }
-                
-                // Generate summary for step 5
-                if (currentStep === 5) {
-                    generateSummary();
-                }
-            } else {
-                submitForm();
-            }
-        }
-        
-        function previousStep() {
-            if (currentStep > 1) {
-                currentStep--;
-                showStep(currentStep);
-            }
-        }
-        
-        function showStep(step) {
-            // Hide all steps
-            document.querySelectorAll('.form-step').forEach(stepEl => {
-                stepEl.classList.remove('active');
-            });
-            
-            // Show current step
-            document.getElementById(`step${step}`).classList.add('active');
-            
-            // Update progress bar
-            const progressPercent = (step / totalSteps) * 100;
-            document.getElementById('progressFill').style.width = `${progressPercent}%`;
-            
-            // Update navigation buttons
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const navButtons = document.getElementById('navigationButtons');
-            
-            if (step === 1) {
-                prevBtn.style.display = 'none';
-                nextBtn.textContent = 'Next →';
-            } else if (step === totalSteps) {
-                prevBtn.style.display = 'inline-flex';
-                nextBtn.textContent = 'Submit Request';
-                nextBtn.innerHTML = '<span class="loading-spinner" id="loadingSpinner"></span>Submit Request';
-            } else if (step === totalSteps + 1) {
-                // Success step
-                navButtons.style.display = 'none';
-            } else {
-                prevBtn.style.display = 'inline-flex';
-                nextBtn.textContent = 'Next →';
-            }
-            
-            updateNextButton();
-        }
-        
-        function validateCurrentStep() {
-            const currentStepEl = document.getElementById(`step${currentStep}`);
-            
-            switch(currentStep) {
-                case 1:
-                    return formData.selectedService ? true : (alert('Please select a service type'), false);
-                
-                case 2:
-                    const checkedRequirements = currentStepEl.querySelectorAll('input[type="checkbox"]:checked');
-                    return checkedRequirements.length > 0 ? true : (alert('Please select at least one specific requirement'), false);
-                
-                case 3:
-                    const serviceType = currentStepEl.querySelector('input[name="serviceType"]:checked');
-                    const startDate = document.getElementById('startDate').value;
-                    const hoursPerDay = document.getElementById('hoursPerDay').value;
-                    
-                    if (!serviceType) {
-                        alert('Please select a service type');
-                        return false;
-                    }
-                    if (!startDate) {
-                        alert('Please select a start date');
-                        return false;
-                    }
-                    if (!hoursPerDay) {
-                        alert('Please select estimated hours per day');
-                        return false;
-                    }
-                    return true;
-                
-                case 4:
-                    const name = document.getElementById('clientName').value.trim();
-                    const phone = document.getElementById('clientPhone').value.trim();
-                    const location = document.getElementById('location').value;
-                    const address = document.getElementById('address').value.trim();
-                    
-                    if (!name) {
-                        alert('Please enter your name');
-                        return false;
-                    }
-                    if (!phone) {
-                        alert('Please enter your phone number');
-                        return false;
-                    }
-                    if (!location) {
-                        alert('Please select a location');
-                        return false;
-                    }
-                    if (!address) {
-                        alert('Please enter your address');
-                        return false;
-                    }
-                    return true;
-                
-                case 5:
-                    const termsAgree = document.getElementById('termsAgree').checked;
-                    return termsAgree ? true : (alert('Please agree to terms and conditions'), false);
-                
-                default:
-                    return true;
-            }
-        }
-        
-        function saveCurrentStepData() {
-            const currentStepEl = document.getElementById(`step${currentStep}`);
-            
-            switch(currentStep) {
-                case 1:
-                    // Already saved during service selection
-                    break;
-                
-                case 2:
-                    const requirements = [];
-                    currentStepEl.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-                        requirements.push(checkbox.nextElementSibling.textContent);
-                    });
-                    formData.specificRequirements = requirements;
-                    formData.additionalDetails = document.getElementById('additionalDetails').value;
-                    break;
-                
-                case 3:
-                    formData.serviceType = currentStepEl.querySelector('input[name="serviceType"]:checked').value;
-                    formData.startDate = document.getElementById('startDate').value;
-                    formData.hoursPerDay = document.getElementById('hoursPerDay').value;
-                    
-                    const schedule = currentStepEl.querySelector('input[name="schedule"]:checked');
-                    formData.schedule = schedule ? schedule.value : 'flexible';
-                    break;
-                
-                case 4:
-                    formData.clientName = document.getElementById('clientName').value;
-                    formData.clientPhone = document.getElementById('clientPhone').value;
-                    formData.clientEmail = document.getElementById('clientEmail').value;
-                    formData.location = document.getElementById('location').value;
-                    formData.address = document.getElementById('address').value;
-                    
-                    const specialRequirements = [];
-                    currentStepEl.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-                        specialRequirements.push(checkbox.value);
-                    });
-                    formData.specialRequirements = specialRequirements;
-                    break;
-            }
-        }
-        
-        function updateNextButton() {
-            const nextBtn = document.getElementById('nextBtn');
-            const isValid = validateCurrentStepSilent();
-            
-            if (isValid) {
-                nextBtn.disabled = false;
-                nextBtn.style.opacity = '1';
-            } else {
-                nextBtn.disabled = true;
-                nextBtn.style.opacity = '0.5';
-            }
-        }
-        
-        function validateCurrentStepSilent() {
-            const currentStepEl = document.getElementById(`step${currentStep}`);
-            
-            switch(currentStep) {
-                case 1:
-                    return formData.selectedService;
-                
-                case 2:
-                    const checkedRequirements = currentStepEl.querySelectorAll('input[type="checkbox"]:checked');
-                    return checkedRequirements.length > 0;
-                
-                case 3:
-                    const serviceType = currentStepEl.querySelector('input[name="serviceType"]:checked');
-                    const startDate = document.getElementById('startDate').value;
-                    const hoursPerDay = document.getElementById('hoursPerDay').value;
-                    return serviceType && startDate && hoursPerDay;
-                
-                case 4:
-                    const name = document.getElementById('clientName').value.trim();
-                    const phone = document.getElementById('clientPhone').value.trim();
-                    const location = document.getElementById('location').value;
-                    const address = document.getElementById('address').value.trim();
-                    return name && phone && location && address;
-                
-                case 5:
-                    return document.getElementById('termsAgree').checked;
-                
-                default:
-                    return true;
-            }
-        }
-        
-        function populateSpecificRequirements() {
-            const container = document.getElementById('specificRequirements');
-            const requirements = serviceRequirements[formData.selectedService] || [];
-            
-            container.innerHTML = '';
-            
-            requirements.forEach((requirement, index) => {
-                const checkboxItem = document.createElement('div');
-                checkboxItem.className = 'checkbox-item';
-                
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.id = `req${index}`;
-                checkbox.value = requirement;
-                checkbox.addEventListener('change', updateNextButton);
-                
-                const label = document.createElement('label');
-                label.htmlFor = `req${index}`;
-                label.textContent = requirement;
-                
-                checkboxItem.appendChild(checkbox);
-                checkboxItem.appendChild(label);
-                container.appendChild(checkboxItem);
-            });
-        }
-        
-        function generateSummary() {
-            const summaryContainer = document.getElementById('requestSummary');
-            const priceContainer = document.getElementById('priceRange');
-            const whatsappPreview = document.getElementById('whatsappPreview');
-            
-            // Create summary
-            const serviceName = document.querySelector(`[data-service="${formData.selectedService}"]`).querySelector('.service-name').textContent;
-            
-            let summaryHTML = `
-                <div class="summary-item">
-                    <span>Service Type:</span>
-                    <span>${serviceName}</span>
-                </div>
-                <div class="summary-item">
-                    <span>Specific Requirements:</span>
-                    <span>${formData.specificRequirements.join(', ')}</span>
-                </div>
-                <div class="summary-item">
-                    <span>Service Duration:</span>
-                    <span>${formatServiceType(formData.serviceType)}</span>
-                </div>
-                <div class="summary-item">
-                    <span>Start Date:</span>
-                    <span>${formatDate(formData.startDate)}</span>
-                </div>
-                <div class="summary-item">
-                    <span>Hours per Day:</span>
-                    <span>${formData.hoursPerDay}</span>
-                </div>
-                <div class="summary-item">
-                    <span>Location:</span>
-                    <span>${formData.location}</span>
-                </div>
-                <div class="summary-item">
-                    <span>Contact:</span>
-                    <span>${formData.clientName} - ${formData.clientPhone}</span>
-                </div>
-            `;
-            
-            if (formData.schedule && formData.schedule !== 'flexible') {
-                summaryHTML += `
-                    <div class="summary-item">
-                        <span>Preferred Schedule:</span>
-                        <span>${formatSchedule(formData.schedule)}</span>
+                <div class="service-grid">
+                    <div class="service-option" data-service="domestic">
+                        <span class="service-icon">🏠</span>
+                        <div class="service-name">Domestic Help</div>
                     </div>
-                `;
-            }
-            
-            if (formData.specialRequirements.length > 0) {
-                summaryHTML += `
-                    <div class="summary-item">
-                        <span>Special Requirements:</span>
-                        <span>${formatSpecialRequirements(formData.specialRequirements)}</span>
+                    <div class="service-option" data-service="hospitality">
+                        <span class="service-icon">🍽️</span>
+                        <div class="service-name">Hospitality Staff</div>
                     </div>
-                `;
-            }
-            
-            summaryContainer.innerHTML = summaryHTML;
-            
-            // Update price estimate
-            const prices = priceEstimates[formData.selectedService];
-            let priceText = `MWK ${prices.min.toLocaleString()} - ${prices.max.toLocaleString()}`;
-            
-            if (formData.serviceType === 'one-time') {
-                priceText = `MWK ${Math.round(prices.min / 4).toLocaleString()} - ${Math.round(prices.max / 4).toLocaleString()}`;
-            } else if (formData.serviceType === 'live-in') {
-                priceText = `MWK ${Math.round(prices.max * 1.5).toLocaleString()} - ${Math.round(prices.max * 2).toLocaleString()}`;
-            }
-            
-            priceContainer.textContent = priceText;
-            
-            // Generate WhatsApp message preview
-            const whatsappMessage = generateWhatsAppMessage();
-            whatsappPreview.textContent = whatsappMessage;
-        }
-        
-        function formatServiceType(type) {
-            const types = {
-                'one-time': 'One-time Service',
-                'regular': 'Regular Service',
-                'live-in': 'Live-in Help'
-            };
-            return types[type] || type;
-        }
-        
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-GB', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-        }
-        
-        function formatSchedule(schedule) {
-            const schedules = {
-                'morning': 'Morning (8AM-12PM)',
-                'afternoon': 'Afternoon (1PM-5PM)',
-                'evening': 'Evening (6PM-10PM)',
-                'fullday': 'Full Day'
-            };
-            return schedules[schedule] || schedule;
-        }
-        
-        function formatSpecialRequirements(requirements) {
-            const reqMap = {
-                'english': 'Must speak English',
-                'experience': 'Minimum 2 years experience',
-                'references': 'Must have references',
-                'transport': 'Must have own transport'
-            };
-            
-            return requirements.map(req => reqMap[req] || req).join(', ');
-        }
-        
-        function generateWhatsAppMessage() {
-            const serviceName = document.querySelector(`[data-service="${formData.selectedService}"]`).querySelector('.service-name').textContent;
-            
-            let message = `🏠 *PAKHOMO JOBS - SERVICE REQUEST*\n\n`;
-            message += `👤 *Client:* ${formData.clientName}\n`;
-            message += `📞 *Phone:* ${formData.clientPhone}\n`;
-            if (formData.clientEmail) {
-                message += `📧 *Email:* ${formData.clientEmail}\n`;
-            }
-            message += `\n🔧 *SERVICE DETAILS:*\n`;
-            message += `• Service Type: ${serviceName}\n`;
-            message += `• Duration: ${formatServiceType(formData.serviceType)}\n`;
-            message += `• Start Date: ${formatDate(formData.startDate)}\n`;
-            message += `• Hours per Day: ${formData.hoursPerDay}\n`;
-            
-            if (formData.schedule && formData.schedule !== 'flexible') {
-                message += `• Preferred Schedule: ${formatSchedule(formData.schedule)}\n`;
-            }
-            
-            message += `\n📍 *LOCATION:*\n`;
-            message += `• City: ${formData.location}\n`;
-            message += `• Address: ${formData.address}\n`;
-            
-            message += `\n📋 *REQUIREMENTS:*\n`;
-            formData.specificRequirements.forEach(req => {
-                message += `• ${req}\n`;
-            });
-            
-            if (formData.specialRequirements.length > 0) {
-                message += `\n⭐ *SPECIAL REQUIREMENTS:*\n`;
-                formData.specialRequirements.forEach(req => {
-                    message += `• ${formatSpecialRequirements([req])}\n`;
-                });
-            }
-            
-            if (formData.additionalDetails) {
-                message += `\n💬 *ADDITIONAL DETAILS:*\n${formData.additionalDetails}\n`;
-            }
-            
-            message += `\n⏰ *Request submitted on:* ${new Date().toLocaleString('en-GB')}\n`;
-            message += `\n✅ Please confirm receipt and provide next steps.`;
-            
-            return message;
-        }
-        
-        function submitForm() {
-            const nextBtn = document.getElementById('nextBtn');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            
-            // Show loading state
-            nextBtn.disabled = true;
-            loadingSpinner.style.display = 'inline-block';
-            nextBtn.innerHTML = 'Submitting... <span class="loading-spinner"></span>';
-            
-            // Save final step data
-            saveCurrentStepData();
-            
-            // Simulate form submission
-            setTimeout(() => {
-                // Generate WhatsApp message
-                const whatsappMessage = generateWhatsAppMessage();
-                const encodedMessage = encodeURIComponent(whatsappMessage);
-                const whatsappUrl = `https://wa.me/265988114909?text=${encodedMessage}`;
+                    <div class="service-option" data-service="culinary">
+                        <span class="service-icon">👨‍🍳</span>
+                        <div class="service-name">Chef/Cook</div>
+                    </div>
+                    <div class="service-option" data-service="security">
+                        <span class="service-icon">🛡️</span>
+                        <div class="service-name">Security Guard</div>
+                    </div>
+                    <div class="service-option" data-service="driver">
+                        <span class="service-icon">🚗</span>
+                        <div class="service-name">Driver</div>
+                    </div>
+                    <div class="service-option" data-service="childcare">
+                        <span class="service-icon">👩‍👦</span>
+                        <div class="service-name">Childcare</div>
+                    </div>
+                    <div class="service-option" data-service="office">
+                        <span class="service-icon">🏢</span>
+                        <div class="service-name">Office Support</div>
+                    </div>
+                    <div class="service-option" data-service="emergency">
+                        <span class="service-icon">🚨</span>
+                        <div class="service-name">Emergency Service</div>
+                    </div>
+                </div>
                 
-                // Open WhatsApp
-                window.open(whatsappUrl, '_blank');
+                <div class="emergency-notice" id="emergencyNotice" style="display: none;">
+                    <strong>🚨 Emergency Service Selected</strong>
+                    For immediate assistance, call our 24/7 hotline: +265 988 11 49 09
+                </div>
+            </div>
+            
+            <!-- Step 2: Specific Requirements -->
+            <div class="form-step" id="step2">
+                <h2 class="step-title">Specific Requirements</h2>
+                <p class="step-subtitle">What specific tasks do you need help with?</p>
                 
-                // Show success step
-                currentStep = totalSteps + 1;
-                showStep(currentStep);
+                <div class="checkbox-group" id="specificRequirements">
+                    <!-- Dynamic content based on service selection -->
+                </div>
                 
-                // Hide navigation buttons
-                document.getElementById('navigationButtons').style.display = 'none';
+                <div class="form-group">
+                    <label class="form-label">Additional Details (Optional)</label>
+                    <textarea class="form-input form-textarea" id="additionalDetails" placeholder="Please provide any additional information about your requirements..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Step 3: Timing & Duration -->
+            <div class="form-step" id="step3">
+                <h2 class="step-title">When do you need help?</h2>
+                <p class="step-subtitle">Select your preferred timing and duration</p>
                 
-                loadingSpinner.style.display = 'none';
-            }, 2000);
-        }
-        
-        // Handle radio button changes for timing section
-        document.addEventListener('change', function(e) {
-            if (e.target.name === 'serviceType') {
-                const scheduleOptions = document.getElementById('scheduleOptions');
-                if (e.target.value === 'live-in') {
-                    scheduleOptions.style.display = 'none';
-                } else {
-                    scheduleOptions.style.display = 'block';
-                }
-                updateNextButton();
-            }
+                <div class="form-group">
+                    <label class="form-label">Service Type</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="serviceType" value="one-time" id="oneTime">
+                            <label for="oneTime">One-time Service</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="serviceType" value="regular" id="regular">
+                            <label for="regular">Regular Service</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="serviceType" value="live-in" id="liveIn">
+                            <label for="liveIn">Live-in Help</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Preferred Start Date</label>
+                    <input type="date" class="form-input" id="startDate" min="">
+                </div>
+                
+                <div class="form-group" id="scheduleOptions">
+                    <label class="form-label">Preferred Schedule</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="schedule" value="morning" id="morning">
+                            <label for="morning">Morning (8AM-12PM)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="schedule" value="afternoon" id="afternoon">
+                            <label for="afternoon">Afternoon (1PM-5PM)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="schedule" value="evening" id="evening">
+                            <label for="evening">Evening (6PM-10PM)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="schedule" value="fullday" id="fullday">
+                            <label for="fullday">Full Day</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">How many hours per day? (Estimate)</label>
+                    <select class="form-input" id="hoursPerDay">
+                        <option value="">Select hours</option>
+                        <option value="2-4">2-4 hours</option>
+                        <option value="4-6">4-6 hours</option>
+                        <option value="6-8">6-8 hours</option>
+                        <option value="8+">8+ hours (Full time)</option>
+                    </select>
+                </div>
+            </div>
             
-            if (e.target.name === 'schedule') {
-                updateNextButton();
-            }
-        });
-        
-        // Phone number formatting
-        document.getElementById('clientPhone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
+            <!-- Step 4: Location & Contact -->
+            <div class="form-step" id="step4">
+                <h2 class="step-title">Location & Contact Details</h2>
+                <p class="step-subtitle">Where should our helper report, and how can we reach you?</p>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Name *</label>
+                    <input type="text" class="form-input" id="clientName" placeholder="Full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-input" id="clientPhone" placeholder="+265 xxx xxx xxx" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" id="clientEmail" placeholder="your.email@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Service Location *</label>
+                    <select class="form-input" id="location" required>
+                        <option value="">Select location</option>
+                        <option value="Lilongwe">Lilongwe</option>
+                        <option value="Blantyre">Blantyre</option>
+                        <option value="Mzuzu">Mzuzu</option>
+                        <option value="Zomba">Zomba</option>
+                        <option value="Kasungu">Kasungu</option>
+                        <option value="Mangochi">Mangochi</option>
+                        <option value="Salima">Salima</option>
+                        <option value="Balaka">Balaka</option>
+                        <option value="Karonga">Karonga</option>
+                        <option value="Other">Other (specify in address)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Detailed Address *</label>
+                    <textarea class="form-input form-textarea" id="address" placeholder="House/building number, street, area, landmarks..." required style="min-height: 80px;"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Special Requirements</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="english" value="english">
+                            <label for="english">Must speak English</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="experience" value="experience">
+                            <label for="experience">Minimum 2 years experience</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="references" value="references">
+                            <label for="references">Must have references</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="transport" value="transport">
+                            <label for="transport">Must have own transport</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            // Add +265 prefix if not present
-            if (value && !value.startsWith('265')) {
-                if (value.startsWith('0')) {
-                    value = '265' + value.substring(1);
-                } else if (value.length === 9) {
-                    value = '265' + value;
-                }
-            }
+            <!-- Step 5: Review & Confirm -->
+            <div class="form-step" id="step5">
+                <h2 class="step-title">Review Your Request</h2>
+                <p class="step-subtitle">Please review your service request before submitting</p>
+                
+                <div class="summary-section" id="requestSummary">
+                    <!-- Dynamic summary content -->
+                </div>
+                
+                <div class="price-estimate" id="priceEstimate">
+                    <h3>💰 Estimated Cost</h3>
+                    <div class="price-range" id="priceRange">MWK 15,000 - 25,000</div>
+                    <div class="price-note">*Final price depends on specific requirements and negotiations</div>
+                </div>
+                
+                <div class="whatsapp-preview">
+                    <strong>📱 Your request will be sent via WhatsApp:</strong><br><br>
+                    <div id="whatsappPreview"></div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="termsAgree" required>
+                        <label for="termsAgree">I agree to Pakhomo Jobs terms and conditions</label>
+                    </div>
+                </div>
+            </div>
             
-            // Format the number
-            if (value.length >= 3) {
-                value = '+' + value.substring(0, 3) + ' ' + value.substring(3);
-            }
-            
-            e.target.value = value;
-        });
-        
-        // Initialize first step
-        showStep(1);
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                const activeElement = document.activeElement;
-                if (activeElement.tagName !== 'TEXTAREA') {
-                    e.preventDefault();
-                    if (validateCurrentStepSilent()) {
-                        nextStep();
-                    }
-                }
-            }
-        });
-        
-        // Auto-save form data to prevent loss
-        function autoSave() {
-            try {
-                const formDataString = JSON.stringify(formData);
-                // Since we cannot use localStorage, we'll just keep it in memory
-                // In a real implementation, you might want to send periodic updates to a server
-            } catch (e) {
-                console.log('Auto-save not available');
-            }
-        }
-        
-        // Auto-save every 30 seconds
-        setInterval(autoSave, 30000);
-        
-        // Prevent accidental page refresh
-        window.addEventListener('beforeunload', function(e) {
-            if (currentStep > 1 && currentStep <= totalSteps) {
-                e.preventDefault();
-                e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
-                return e.returnValue;
-            }
-        });
-    </script>
-</body>
-</html>
+            <!-- Success Step -->
+            <div class="form-step" id="stepSuccess">
+                <div class="success-message">
+                    <div class="success-icon">🎉</div>
+                    <h2>Booking Request Sent!</h2>
+                    <p>Thank you! Your booking details have been sent. For a faster response and to confirm your booking, please message us on WhatsApp.</p>
+                    <button type="button" class="btn btn-primary" onclick="openWhatsApp()" style="margin-top: 1rem; background: #25D366;">
+                        <svg style="width:20px; height:20px; fill:white; margin-right: 8px;" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.61 15.35 3.48 16.84L2 22L7.32 20.55C8.77 21.33 10.37 21.8 12.04 21.8C17.5 21.8 21.95 17.35 21.95 11.91C21.95 6.45 17.5 2 12.04 2M12.04 20.13C10.56 20.13 9.12 19.7 7.89 18.9L7.5 18.68L4.32 19.53L5.19 16.41L4.95 16.02C4.1 14.68 3.63 13.13 3.63 11.91C3.63 7.33 7.41 3.55 12.04 3.55C16.67 3.55 20.45 7.33 20.45 11.91C20.45 16.49 16.67 20.13 12.04 20.13M17.46 14.47C17.23 14.36 16.13 13.85 15.91 13.77C15.69 13.68 15.53 13.64 15.38 13.86C15.23 14.08 14.76 14.64 14.61 14.82C14.46 14.99 14.31 15.01 14.06 14.92C13.81 14.84 12.9 14.54 11.82 13.63C11.01 12.93 10.45 12.12 10.3 11.87C10.16 11.62 10.26 11.5 10.38 11.38C10.49 11.27 10.62 11.11 10.74 10.96C10.86 10.82 10.91 10.7 11 10.53C11.09 10.36 11.04 10.21 10.97 10.09C10.9 9.97 10.35 8.61 10.13 8.09C9.92 7.57 9.7 7.64 9.56 7.63C9.41 7.63 9.26 7.63 9.11 7.63C8.96 7.63 8.7 7.69 8.48 7.91C8.26 8.13 7.79 8.56 7.79 9.61C7.79 10.66 8.51 11.66 8.63 11.83C8.75 12 10.16 14.16 12.21 15.06C12.94 15.37 13.48 15.52 13.89 15.63C14.53 15.79 15.09 15.75 15.51 15.66C15.98 15.56 17.03 15.01 17.23 14.9C17.43 14.78 17.43 14.67 17.46 14.47Z"></path></svg>
+                        Message us on WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            </form>
+        </div>
