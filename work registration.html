@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join as Worker - Pakhomo Jobs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: #764ba2;
+        }
+        
+        /* Form Container */
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .form-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-content {
+            padding: 3rem 2rem;
+        }
+        
+        /* Form Sections */
+        .form-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-icon {
+            font-size: 1.8rem;
+        }
+        
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Checkbox Groups */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: #f8f9ff;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #e8ebff;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .checkbox-item label {
+            margin: 0;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background: #f8f9ff;
+            transition: all 0.3s;
+        }
+        
+        .file-upload:hover {
+            border-color: #764ba2;
+            background: #e8ebff;
+        }
+        
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        
+        .file-upload-label {
+            cursor: pointer;
+            display: block;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .file-upload-text {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #f8f9ff;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .btn-full {
+            width: 100%;
+            font-size: 1.2rem;
+            padding: 18px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 3rem;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Progress Indicator */
+        .progress-bar {
+            background: #e1e5e9;
+            height: 4px;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .form-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .form-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .form-header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .nav {
+                padding: 0 15px;
+            }
+        }
+        
+        /* Helper Text */
+        .helper-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .error-text {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">🏠 Pakhomo Jobs</a>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <!-- Form Header -->
+            <div class="form-header">
+                <h1>Join Our Team</h1>
+                <p>Start your journey with Pakhomo Jobs. Fill out this form to become a trusted service provider in our network.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="form-content">
+                <form id="workerRegistrationForm" enctype="multipart/form-data">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">👤</span>
+                            Personal Information
+                        </h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender <span class="required">*</span></label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nationalId">National ID Number <span class="required">*</span></label>
+                            <input type="text" id="nationalId" name="nationalId" required placeholder="e.g., 12345678901234567">
+                            <div class="helper-text">Your National ID will be used for verification purposes</div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">📞</span>
+                            Contact Information
+                        </h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+265 888 123 456">
+                            </div>
+                            <div class="form-group">
+                                <label for="whatsapp">WhatsApp Number</label>
+                                <input type="tel" id="whatsapp" name="whatsapp" placeholder="+265 888 123 456">
+                                <div class="helper-text">If different from phone number</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Physical Address <span class="required">*</span></label>
+                            <textarea id="address" name="address" required placeholder="House number, street name, area, city"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City/Town <span class="required">*</span></label>
+                                <select id="city" name="city" required>
+                                    <option value="">Select City</option>
+                                    <option value="lilongwe">Lilongwe</option>
+                                    <option value="blantyre">Blantyre</option>
+                                    <option value="mzuzu">Mzuzu</option>
+                                    <option value="zomba">Zomba</option>
+                                    <option value="kasungu">Kasungu</option>
+                                    <option value="mangochi">Mangochi</option>
+                                    <option value="karonga">Karonga</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="district">District <span class="required">*</span></label>
+                                <input type="text" id="district" name="district" required placeholder="e.g., Lilongwe">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services Offered -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">🛠️</span>
+                            Services You Want to Offer
+                        </h3>
+                        <p class="helper-text" style="margin-bottom: 1.5rem;">Select all services you are qualified and willing to provide:</p>
+
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-maid" name="services[]" value="maid">
+                                <label for="service-maid">Full-Time Maid (Live-in/Live-out)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-cleaner" name="services[]" value="cleaner">
+                                <label for="service-cleaner">Part-Time House Cleaner</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-nanny" name="services[]" value="nanny">
+                                <label for="service-nanny">Nanny/Babysitter</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-cook" name="services[]" value="cook">
+                                <label for="service-cook">Cook/Kitchen Assistant</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-gardener" name="services[]" value="gardener">
+                                <label for="service-gardener">Gardener/Garden Boy</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-laundry" name="services[]" value="laundry">
+                                <label for="service-laundry">Laundry & Ironing</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-handyman" name="services[]" value="handyman">
+                                <label for="service-handyman">General Handyman</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-plumber" name="services[]" value="plumber">
+                                <label for="service-plumber">Plumber</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-electrician" name="services[]" value="electrician">
+                                <label for="service-electrician">Electrician</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-painter" name="services[]" value="painter">
+                                <label for="service-painter">Painter</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-mover" name="services[]" value="mover">
+                                <label for="service-mover">House/Office Mover</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="service-caregiver" name="services[]" value="caregiver">
+                                <label for="service-caregiver">Elderly/Disabled Care</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience & Skills -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">💼</span>
+                            Experience & Skills
+                        </h3>
+
+                        <div class="form-group">
+                            <label for="experience">Years of Experience <span class="required">*</span></label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Select Experience Level</option>
+                                <option value="0-1">0-1 years (New to the field)</option>
+                                <option value="2-3">2-3 years</option>
+                                <option value="4-5">4-5 years</option>
+                                <option value="6-10">6-10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="previousWork">Previous Work Experience</label>
+                            <textarea id="previousWork" name="previousWork" placeholder="Describe your previous work experience, including employers, duration, and key responsibilities..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skills">Special Skills & Certifications</label>
+                            <textarea id="skills" name="skills" placeholder="List any special skills, certifications, training, or qualifications you have..."></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="education">Education Level</label>
+                                <select id="education" name="education">
+                                    <option value="">Select Education Level</option>
+                                    <option value="primary">Primary School</option>
+                                    <option value="secondary">Secondary School</option>
+                                    <option value="college">College/University</option>
+                                    <option value="vocational">Vocational Training</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="languages">Languages Spoken</label>
+                                <input type="text" id="languages" name="languages" placeholder="e.g., Chichewa, English, French">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">📅</span>
+                            Availability
+                        </h3>
+
+                        <div class="form-group">
+                            <label for="availability">Work Schedule Preference <span class="required">*</span></label>
+                            <select id="availability" name="availability" required>
+                                <option value="">Select Availability</option>
+                                <option value="full-time">Full-time (40+ hours/week)</option>
+                                <option value="part-time">Part-time (20-40 hours/week)</option>
+                                <option value="weekends">Weekends only</option>
+                                <option value="flexible">Flexible schedule</option>
+                                <option value="as-needed">As needed basis</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Days Available (Check all that apply):</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="monday" name="days[]" value="monday">
+                                    <label for="monday">Monday</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tuesday" name="days[]" value="tuesday">
+                                    <label for="tuesday">Tuesday</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="wednesday" name="days[]" value="wednesday">
+                                    <label for="wednesday">Wednesday</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="thursday" name="days[]" value="thursday">
+                                    <label for="thursday">Thursday</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="friday" name="days[]" value="friday">
+                                    <label for="friday">Friday</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="saturday" name="days[]" value="saturday">
+                                    <label for="saturday">Saturday</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="sunday" name="days[]" value="sunday">
+                                    <label for="sunday">Sunday</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="startTime">Preferred Start Time</label>
+                                <input type="time" id="startTime" name="startTime">
+                            </div>
+                            <div class="form-group">
+                                <label for="endTime">Preferred End Time</label>
+                                <input type="time" id="endTime" name="endTime">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- References -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">📋</span>
+                            References
+                        </h3>
+                        <p class="helper-text" style="margin-bottom: 1.5rem;">Provide at least 2 references who can vouch for your work quality and character:</p>
+
+                        <div style="border: 1px solid #eee; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <h4 style="color: #667eea; margin-bottom: 1rem;">Reference 1 <span class="required">*</span></h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="ref1Name">Full Name</label>
+                                    <input type="text" id="ref1Name" name="ref1Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ref1Phone">Phone Number</label>
+                                    <input type="tel" id="ref1Phone" name="ref1Phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ref1Relationship">Relationship/How they know you</label>
+                                <input type="text" id="ref1Relationship" name="ref1Relationship" placeholder="e.g., Former employer, neighbor, church member">
+                            </div>
+                        </div>
+
+                        <div style="border: 1px solid #eee; border-radius: 10px; padding: 1.5rem;">
+                            <h4 style="color: #667eea; margin-bottom: 1rem;">Reference 2</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="ref2Name">Full Name</label>
+                                    <input type="text" id="ref2Name" name="ref2Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ref2Phone">Phone Number</label>
+                                    <input type="tel" id="ref2Phone" name="ref2Phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ref2Relationship">Relationship/How they know you</label>
+                                <input type="text" id="ref2Relationship" name="ref2Relationship" placeholder="e.g., Former employer, neighbor, church member">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documents Upload -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">📄</span>
+                            Document Upload
+                        </h3>
+
+                        <div class="form-group">
+                            <label>Profile Photo</label>
+                            <div class="file-upload">
+                                <label for="profilePhoto" class="file-upload-label">
+                                    📸 Upload Profile Photo
+                                    <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+                                </label>
+                                <div class="file-upload-text">JPG, PNG or GIF (Max 5MB)</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>National ID Copy <span class="required">*</span></label>
+                            <div class="file-upload">
+                                <label for="nationalIdCopy" class="file-upload-label">
+                                    🆔 Upload National ID Copy
+                                    <input type="file" id="nationalIdCopy" name="nationalIdCopy" accept="image/*,.pdf">
+                                </label>
+                                <div class="file-upload-text">Clear photo or PDF of your National ID</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Additional Documents</label>
+                            <div class="file-upload">
+                                <label for="additionalDocs" class="file-upload-label">
+                                    📋 Upload Additional Documents
+                                    <input type="file" id="additionalDocs" name="additionalDocs" multiple accept="image/*,.pdf">
+                                </label>
+                                <div class="file-upload-text">Certificates, diplomas, or other relevant documents</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">💬</span>
+                            Additional Information
+                        </h3>
+
+                        <div class="form-group">
+                            <label for="motivation">Why do you want to join Pakhomo Jobs?</label>
+                            <textarea id="motivation" name="motivation" placeholder="Tell us about your motivation and what you hope to achieve by joining our platform..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expectations">Expected Hourly/Daily Rate (MWK)</label>
+                            <input type="text" id="expectations" name="expectations" placeholder="e.g., MWK 1,000 per hour or MWK 5,000 per day">
+                            <div class="helper-text">This helps us match you with appropriate clients</div>
+                        </div>
+
+                        <div class="form-group"> <label for="additionalInfo">Additional Information</label>
+                            <textarea id="additionalInfo" name="additionalInfo" placeholder="Any other information you'd like us to know about you, your work style, or special considerations..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Transportation</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="ownTransport" name="transport[]" value="own">
+                                    <label for="ownTransport">I have my own transportation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="publicTransport" name="transport[]" value="public">
+                                    <label for="publicTransport">I use public transportation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="walkingDistance" name="transport[]" value="walking">
+                                    <label for="walkingDistance">I can work within walking distance</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">🚨</span>
+                            Emergency Contact
+                        </h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="emergencyName">Emergency Contact Name <span class="required">*</span></label>
+                                <input type="text" id="emergencyName" name="emergencyName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emergencyPhone">Emergency Contact Phone <span class="required">*</span></label>
+                                <input type="tel" id="emergencyPhone" name="emergencyPhone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emergencyRelationship">Relationship to You <span class="required">*</span></label>
+                            <input type="text" id="emergencyRelationship" name="emergencyRelationship" required placeholder="e.g., Parent, Spouse, Sibling">
+                        </div>
+                    </div>
+
+                    <!-- Background Check Consent -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">🔐</span>
+                            Background Check & Consent
+                        </h3>
+
+                        <div class="form-group">
+                            <div class="checkbox-item" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1.5rem;">
+                                <input type="checkbox" id="backgroundCheck" name="backgroundCheck" required>
+                                <label for="backgroundCheck">
+                                    I consent to a background check and understand that Pakhomo Jobs may verify my identity, references, and work history as part of the registration process. <span class="required">*</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-item" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1.5rem;">
+                                <input type="checkbox" id="criminalRecord" name="criminalRecord">
+                                <label for="criminalRecord">
+                                    I have a criminal record that I would like to disclose
+                                </label>
+                            </div>
+                            <div class="helper-text">Checking this box does not automatically disqualify you. We believe in second chances and will review each case individually.</div>
+                        </div>
+
+                        <div class="form-group" id="criminalRecordDetails" style="display: none;">
+                            <label for="criminalDetails">Please provide details (optional)</label>
+                            <textarea id="criminalDetails" name="criminalDetails" placeholder="Brief description of the situation and how long ago it occurred..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <span class="section-icon">📜</span>
+                            Terms and Conditions
+                        </h3>
+
+                        <div class="terms-box" style="background: #f8f9ff; border: 2px solid #667eea; border-radius: 10px; padding: 2rem; margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto;">
+                            <h4 style="color: #667eea; margin-bottom: 1rem;">Pakhomo Jobs Worker Terms & Conditions</h4>
+                            
+                            <p><strong>1. Service Quality:</strong> I commit to providing professional, reliable, and high-quality services to all clients matched through Pakhomo Jobs.</p>
+                            
+                            <p><strong>2. Communication:</strong> I will maintain clear, respectful communication with clients and respond promptly to messages and job requests.</p>
+                            
+                            <p><strong>3. Reliability:</strong> I will arrive on time for scheduled work and notify clients immediately if I cannot fulfill a commitment.</p>
+                            
+                            <p><strong>4. Safety & Security:</strong> I understand the importance of client safety and property security and will conduct myself professionally at all times.</p>
+                            
+                            <p><strong>5. Platform Fees:</strong> I understand that Pakhomo Jobs may charge a small service fee for successful job matches and platform maintenance.</p>
+                            
+                            <p><strong>6. Ratings & Reviews:</strong> I consent to a rating and review system where clients can provide feedback about my services.</p>
+                            
+                            <p><strong>7. Information Accuracy:</strong> All information provided in this registration is accurate and truthful to the best of my knowledge.</p>
+                            
+                            <p><strong>8. Platform Updates:</strong> I agree to receive updates about job opportunities, platform changes, and relevant communications via phone/WhatsApp.</p>
+                            
+                            <p><strong>9. Dispute Resolution:</strong> Any disputes will be handled through Pakhomo Jobs' mediation process in good faith.</p>
+                            
+                            <p><strong>10. Termination:</strong> Either party may terminate this agreement with appropriate notice. Pakhomo Jobs reserves the right to remove workers who consistently receive poor reviews or violate terms.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-item" style="background: #e8f5e8; border: 2px solid #4CAF50; padding: 1.5rem;">
+                                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                <label for="agreeTerms">
+                                    I have read, understood, and agree to the Pakhomo Jobs Terms and Conditions outlined above. <span class="required">*</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-item" style="background: #e3f2fd; border: 2px solid #2196F3; padding: 1.5rem;">
+                                <input type="checkbox" id="dataConsent" name="dataConsent" required>
+                                <label for="dataConsent">
+                                    I consent to Pakhomo Jobs collecting, storing, and using my personal information for the purpose of job matching and platform operations, in accordance with Malawi's data protection regulations. <span class="required">*</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="marketingConsent" name="marketingConsent">
+                                <label for="marketingConsent">
+                                    I would like to receive promotional messages, tips for workers, and platform updates via SMS/WhatsApp
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back()">
+                            ← Go Back
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                            Complete Registration →
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    <h3>🎉 Registration Submitted Successfully!</h3>
+                    <p>Thank you for joining Pakhomo Jobs! We've received your application and will review it within 2-3 business days.</p>
+                    <p><strong>What happens next:</strong></p>
+                    <ul style="text-align: left; margin: 1rem 0;">
+                        <li>Our team will verify your information and references</li>
+                        <li>We'll contact you via phone/WhatsApp for a brief interview</li>
+                        <li>Once approved, you'll start receiving job opportunities</li>
+                        <li>We'll send you a welcome package with platform guidelines</li>
+                    </ul>
+                    <p><strong>Questions?</strong> Contact us on WhatsApp: <a href="https://wa.me/265888123456" style="color: #25D366;">+265 888 123 456</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/265888123456" class="whatsapp-btn" title="Chat with us on WhatsApp">
+        💬
+    </a>
+
+    <script>
+        // Form Progress Tracking
+        const form = document.getElementById('workerRegistrationForm');
+        const progressFill = document.getElementById('progressFill');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        // Calculate and update progress
+        function updateProgress() {
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+            const filledFields = Array.from(requiredFields).filter(field => {
+                if (field.type === 'checkbox') {
+                    return field.checked;
+                } else {
+                    return field.value.trim() !== '';
+                }
+            });
+            
+            const progress = (filledFields.length / requiredFields.length) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        // Add event listeners to all form inputs
+        const formInputs = form.querySelectorAll('input, select, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('input', updateProgress);
+            input.addEventListener('change', updateProgress);
+        });
+
+        // Criminal record disclosure toggle
+        const criminalRecord = document.getElementById('criminalRecord');
+        const criminalRecordDetails = document.getElementById('criminalRecordDetails');
+
+        criminalRecord.addEventListener('change', function() {
+            if (this.checked) {
+                criminalRecordDetails.style.display = 'block';
+                criminalRecordDetails.classList.add('fade-in');
+            } else {
+                criminalRecordDetails.style.display = 'none';
+                document.getElementById('criminalDetails').value = '';
+            }
+        });
+
+        // File upload handling
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.parentNode;
+                const fileCount = this.files.length;
+                
+                if (fileCount > 0) {
+                    if (fileCount === 1) {
+                        label.style.background = '#e8f5e8';
+                        label.style.borderColor = '#4CAF50';
+                        label.innerHTML = `✅ ${this.files[0].name}`;
+                    } else {
+                        label.style.background = '#e8f5e8';
+                        label.style.borderColor = '#4CAF50';
+                        label.innerHTML = `✅ ${fileCount} files selected`;
+                    }
+                } else {
+                    label.style.background = '#f8f9ff';
+                    label.style.borderColor = '#667eea';
+                }
+            });
+        });
+
+        // Form validation
+        function validateForm() {
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            let firstInvalidField = null;
+
+            // Clear previous error messages
+            document.querySelectorAll('.error-text').forEach(error => {
+                error.style.display = 'none';
+            });
+
+            requiredFields.forEach(field => {
+                const isFieldValid = field.type === 'checkbox' ? field.checked : field.value.trim() !== '';
+                
+                if (!isFieldValid) {
+                    isValid = false;
+                    if (!firstInvalidField) {
+                        firstInvalidField = field;
+                    }
+                    
+                    // Show error message
+                    let errorElement = field.parentNode.querySelector('.error-text');
+                    if (!errorElement) {
+                        errorElement = document.createElement('div');
+                        errorElement.className = 'error-text';
+                        field.parentNode.appendChild(errorElement);
+                    }
+                    errorElement.textContent = 'This field is required';
+                    errorElement.style.display = 'block';
+                    
+                    // Add error styling
+                    field.style.borderColor = '#e74c3c';
+                } else {
+                    // Remove error styling
+                    field.style.borderColor = '#e1e5e9';
+                }
+            });
+
+            // Validate at least one service is selected
+            const services = form.querySelectorAll('input[name="services[]"]:checked');
+            if (services.length === 0) {
+                isValid = false;
+                const servicesSection = document.querySelector('.checkbox-group');
+                let errorElement = servicesSection.parentNode.querySelector('.error-text');
+                if (!errorElement) {
+                    errorElement = document.createElement('div');
+                    errorElement.className = 'error-text';
+                    servicesSection.parentNode.appendChild(errorElement);
+                }
+                errorElement.textContent = 'Please select at least one service you want to offer';
+                errorElement.style.display = 'block';
+            }
+
+            // Validate phone number format (basic)
+            const phone = document.getElementById('phone').value;
+            if (phone && !phone.match(/^\+?265\s?\d{3}\s?\d{3}\s?\d{3}$/)) {
+                isValid = false;
+                const phoneField = document.getElementById('phone');
+                let errorElement = phoneField.parentNode.querySelector('.error-text');
+                if (!errorElement) {
+                    errorElement = document.createElement('div');
+                    errorElement.className = 'error-text';
+                    phoneField.parentNode.appendChild(errorElement);
+                }
+                errorElement.textContent = 'Please enter a valid phone number (e.g., +265 888 123 456)';
+                errorElement.style.display = 'block';
+                phoneField.style.borderColor = '#e74c3c';
+            }
+
+            // Validate National ID format (basic)
+            const nationalId = document.getElementById('nationalId').value;
+            if (nationalId && nationalId.length < 8) {
+                isValid = false;
+                const nationalIdField = document.getElementById('nationalId');
+                let errorElement = nationalIdField.parentNode.querySelector('.error-text');
+                if (!errorElement) {
+                    errorElement = document.createElement('div');
+                    errorElement.className = 'error-text';
+                    nationalIdField.parentNode.appendChild(errorElement);
+                }
+                errorElement.textContent = 'National ID must be at least 8 characters long';
+                errorElement.style.display = 'block';
+                nationalIdField.style.borderColor = '#e74c3c';
+            }
+
+            if (!isValid && firstInvalidField) {
+                firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstInvalidField.focus();
+            }
+
+            return isValid;
+        }
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+
+            // Show loading state
+            submitBtn.innerHTML = '⏳ Submitting...';
+            submitBtn.disabled = true;
+
+            // Simulate form submission (replace with actual API call)
+            setTimeout(function() {
+                // Hide form and show success message
+                form.style.display = 'none';
+                successMessage.classList.add('show');
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Reset button (in case user goes back)
+                submitBtn.innerHTML = 'Complete Registration →';
+                submitBtn.disabled = false;
+
+                // Send welcome WhatsApp message (in real implementation)
+                console.log('Form submitted successfully!');
+                
+                // Here you would typically send the form data to your backend
+                // const formData = new FormData(form);
+                // fetch('/api/worker-registration', {
+                //     method: 'POST',
+                //     body: formData
+                // }).then(response => response.json())
+                //   .then(data => console.log('Success:', data))
+                //   .catch(error => console.error('Error:', error));
+
+            }, 2000);
+        });
+
+        // Initialize progress on page load
+        updateProgress();
+
+        // Auto-populate WhatsApp from phone if same
+        document.getElementById('phone').addEventListener('input', function() {
+            const whatsappField = document.getElementById('whatsapp');
+            if (!whatsappField.value) {
+                whatsappField.value = this.value;
+            }
+        });
+
+        // Dynamic city/district relationship
+        document.getElementById('city').addEventListener('change', function() {
+            const district = document.getElementById('district');
+            if (this.value && this.value !== 'other') {
+                district.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            }
+        });
+
+        // Smooth scrolling for better UX
+        document.querySelectorAll('.form-section').forEach((section, index) => {
+            section.style.animationDelay = (index * 0.1) + 's';
+            section.classList.add('fade-in');
+        });
+
+        // Add floating labels effect
+        formInputs.forEach(input => {
+            if (input.type !== 'checkbox' && input.type !== 'file') {
+                input.addEventListener('focus', function() {
+                    this.parentNode.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentNode.classList.remove('focused');
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Additional CSS for enhanced UX -->
+    <style>
+        .form-group.focused label {
+            color: #667eea;
+            font-size: 0.9rem;
+            transform: translateY(-5px);
+        }
+        
+        .form-section {
+            opacity: 0;
+            animation: slideUpFade 0.6s ease-out forwards;
+        }
+        
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .checkbox-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .file-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Loading animation for submit button */
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        /* Success animation */
+        .success-message {
+            animation: bounceIn 0.8s ease-out;
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Mobile improvements */
+        @media (max-width: 768px) {
+            .terms-box {
+                max-height: 250px;
+                font-size: 0.9rem;
+            }
+            
+            .whatsapp-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 12px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</body>
+</html>

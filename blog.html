@@ -10,11 +10,105 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
+        <!-- Inline Styles for Header Consistency -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Using the font already linked */
+            line-height: 1.6;
+            color: #333;
+            padding-top: 80px; /* Add padding to body to avoid content being hidden by fixed header */
+            background-color: #f8f9ff; /* Consistent background color */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0; /* Ensure it spans the full width */
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Responsive Nav for smaller screens */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide links on mobile */
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+
     <!-- External CSS -->
     <link rel="stylesheet" href="css/blog.css">
 </head>
 
-<!-- Blog Section -->
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="logo" style="text-decoration: none;">🏠 Pakhomo Jobs</a>
+            <ul class="nav-links">
+                <li><a href="index.html#overview">Overview</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#tech">Technology</a></li>
+                <li><a href="index.html#goals">Goals</a></li>
+                <li><a href="blog.html" style="color: #667eea; font-weight: bold;">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Blog Section -->
     <section class="section" id="blog">
         <div class="container">
             <h2 class="section-title">Latest Updates & Success Stories</h2>
@@ -137,31 +231,73 @@
         </div>
     </section>
 
-    <!-- Goals -->
-    <section class="section" id="goals">
-        <div class="container">
-            <h2 class="section-title">Website Goals</h2>
-            <div class="goals-grid">
-                <div class="goal-item">
-                    <div class="icon">🎯</div>
-                    <h4>Easy Access to Trusted Help</h4>
-                    <p>Simplify the process of finding reliable domestic and hospitality workers</p>
-                </div>
-                <div class="goal-item">
-                    <div class="icon">💼</div>
-                    <h4>Dignified Job Creation</h4>
-                    <p>Create safe, respectful employment opportunities for informal workers</p>
-                </div>
-                <div class="goal-item">
-                    <div class="icon">⚡</div>
-                    <h4>Streamlined Operations</h4>
-                    <p>Efficient payments, training programs, and feedback systems</p>
-                </div>
-                <div class="goal-item">
-                    <div class="icon">🚀</div>
-                    <h4>Scalable Marketplace</h4>
-                    <p>Build a service platform rooted in Malawian needs with national growth potential</p>
-                </div>
+   <!-- Blog Features -->
+   <section class="section" id="blog-features">
+    <div class="container">
+        <h2 class="section-title">Blog Features & Community</h2>
+        <div class="goals-grid">
+            <div class="goal-item">
+                <div class="icon">📚</div>
+                <h4>Success Stories</h4>
+                <p>Real stories from workers who transformed their lives through our platform</p>
+            </div>
+            <div class="goal-item">
+                <div class="icon">💡</div>
+                <h4>Expert Tips & Guides</h4>
+                <p>Professional advice for both service providers and clients</p>
+            </div>
+            <div class="goal-item">
+                <div class="icon">🎥</div>
+                <h4>Training Resources</h4>
+                <p>Video tutorials, certification updates, and skill development content</p>
+            </div>
+            <div class="goal-item">
+                <div class="icon">🌟</div>
+                <h4>Community Highlights</h4>
+                <p>Celebrating our workers, sharing client testimonials, and building trust</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Newsletter Signup -->
+<section class="section" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+    <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: white; margin-bottom: 1rem;">Stay Updated</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
+                Get the latest success stories, tips, and updates delivered to your inbox
+            </p>
+            <div style="display: flex; gap: 1rem; max-width: 400px; margin: 0 auto; flex-wrap: wrap;">
+                <input type="email" placeholder="Enter your email" style="flex: 1; padding: 12px 16px; border: none; border-radius: 8px; font-size: 1rem; min-width: 200px;">
+                <button style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Subscribe</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Worker Spotlight -->
+<section class="section" style="background: #f8f9ff;">
+    <div class="container">
+        <h2 class="section-title">Worker Spotlight</h2>
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center; max-width: 1000px; margin: 0 auto;">
+            <div style="text-align: center;">
+                <img src="images/maid.jpg" alt="Featured Worker" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 32px rgba(0,0,0,0.1); margin-bottom: 1rem;">
+                <h3 style="margin-bottom: 0.5rem; color: #333;">Grace Mwanza</h3>
+                <p style="color: #667eea; font-weight: 600;">⭐ 4.9/5 Rating • 50+ Jobs Completed</p>
+            </div>
+            <div>
+                <h3 style="color: #333; margin-bottom: 1rem;">From Uncertainty to Excellence</h3>
+                <p style="color: #666; line-height: 1.7; margin-bottom: 1.5rem;">
+                    "When I first joined Pakhomo Jobs, I was nervous about working in different homes. The training program gave me confidence, and now I have regular clients who trust me completely. I've been able to support my family and even start saving for my daughter's education."
+                </p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <span style="background: #e8f2ff; color: #667eea; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 500;">House Cleaning</span>
+                    <span style="background: #e8f2ff; color: #667eea; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 500;">Childcare</span>
+                    <span style="background: #e8f2ff; color: #667eea; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: 500;">Cooking</span>
+                </div>
+                <a href="#" style="color: #667eea; text-decoration: none; font-weight: 600;">Read Grace's Full Story →</a>
+            </div>
+        </div>
+    </div>
+</section>
