@@ -15,7 +15,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: url(images/maid.jpg) center / cover no-repeat;
         }
         
         .container {
@@ -43,13 +42,13 @@
         }
         
         .logo {
-        font-size: 1.8rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         
         .nav-links {
             display: flex;
@@ -70,12 +69,35 @@
         
         /* Hero Section */
         .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/maid.jpg') center/cover no-repeat;
             padding: 120px 0 80px;
             text-align: center;
             color: white;
             min-height: 100vh;
             display: flex;
             align-items: center;
+            position: relative;
+        }
+        
+        .hero-bg-gallery {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            opacity: 0.1;
+        }
+        
+        .hero-bg-gallery img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
         .hero-content h1 {
@@ -151,6 +173,102 @@
             color: #333;
         }
         
+        /* Image Placeholder Styling */
+        .img-placeholder {
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .img-placeholder::before {
+            content: attr(data-placeholder);
+            position: absolute;
+            z-index: 1;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+        }
+        
+        .service-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+        }
+        
+        .service-category h3 {
+            font-size: 1.4rem;
+            color: #667eea;
+            margin: 0;
+        }
+        
+        .service-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .service-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .service-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .service-list li::before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+        }
+        
         /* Platform Overview */
         .platform-grid {
             display: grid;
@@ -171,16 +289,79 @@
             transform: translateY(-5px);
         }
         
-        .platform-card h3 {
-            font-size: 1.5rem;
+        .platform-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             margin-bottom: 1rem;
-            color: #667eea;
         }
         
         .platform-card .icon {
             font-size: 3rem;
+        }
+        
+        .platform-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+        }
+        
+        .platform-card h3 {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin: 0;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .how-it-works .section-title {
+            color: white;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .process-step {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .step-number {
+            background: white;
+            color: #667eea;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .step-image {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+            border-radius: 10px;
+        }
+        
+        .process-step h4 {
+            font-size: 1.3rem;
             margin-bottom: 1rem;
-            display: block;
         }
         
         /* User Journey */
@@ -198,13 +379,27 @@
             border-radius: 15px;
         }
         
+        .journey-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .journey-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+        }
+        
         .journey-card h3 {
             font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            margin: 0;
         }
         
         .journey-steps {
             list-style: none;
+            counter-reset: step-counter;
         }
         
         .journey-steps li {
@@ -230,10 +425,6 @@
             font-size: 0.9rem;
         }
         
-        .journey-steps {
-            counter-reset: step-counter;
-        }
-        
         /* Features Grid */
         .features-grid {
             display: grid;
@@ -245,6 +436,18 @@
         .feature-item {
             text-align: center;
             padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-header {
+            margin-bottom: 1rem;
         }
         
         .feature-item .icon {
@@ -253,10 +456,86 @@
             color: #667eea;
         }
         
+        .feature-image {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 10px;
+        }
+        
         .feature-item h4 {
             font-size: 1.3rem;
             margin-bottom: 1rem;
             color: #333;
+        }
+        
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        
+        .testimonial-info h5 {
+            margin: 0;
+            color: #333;
+        }
+        
+        .testimonial-rating {
+            color: #ffb400;
+            margin: 0.5rem 0;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #666;
+        }
+        
+        /* Trust Section */
+        .trust-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .trust-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .trust-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .trust-image {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+            border-radius: 10px;
         }
         
         /* Tech Stack */
@@ -292,10 +571,22 @@
             border-left: 5px solid #667eea;
         }
         
+        .goal-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
         .goal-item .icon {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
             color: #667eea;
+        }
+        
+        .goal-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
         }
         
         /* Footer */
@@ -367,6 +658,14 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -377,16 +676,24 @@
             <div class="logo">🏠 Pakhomo Jobs</div>
             <ul class="nav-links">
                 <li><a href="#overview">Overview</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#journey">How It Works</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#tech">Technology</a></li>
                 <li><a href="#goals">Goals</a></li>
+                <li><a href="#blog">Blog</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-bg-gallery">
+            <img src="images/maid.jpg" alt="Cleaning service">
+            <img src="images/maid.jpg" alt="Garden service">
+            <img src="images/maid.jpg" alt="Moving service">
+            <img src="images/maid.jpg" alt="Handyman service">
+        </div>
         <div class="container">
             <div class="hero-content">
                 <h1>Pakhomo Jobs</h1>
@@ -411,22 +718,42 @@
             
             <div class="platform-grid">
                 <div class="platform-card">
-                    <span class="icon">🏠</span>
+                    <div class="platform-card-header">
+                        <span class="icon">🏠</span>
+                        <div class="img-placeholder platform-image" data-placeholder="Client Dashboard">
+                            <img src="images/maid.jpg" alt="Client interface">
+                        </div>
+                    </div>
                     <h3>For Clients</h3>
                     <p>Book trusted helpers like maids, cleaners, waiters, or cooks with ease. View profiles, manage schedules, and handle payments securely.</p>
                 </div>
                 <div class="platform-card">
-                    <span class="icon">👩🏾‍🔧</span>
+                    <div class="platform-card-header">
+                        <span class="icon">👩🏾‍🔧</span>
+                        <div class="img-placeholder platform-image" data-placeholder="Worker Profile">
+                            <img src="images/maid.jpg" alt="Worker profile">
+                        </div>
+                    </div>
                     <h3>For Workers</h3>
                     <p>Find dignified work opportunities, access training resources, and build your reputation through our rating system.</p>
                 </div>
                 <div class="platform-card">
-                    <span class="icon">🛠️</span>
+                    <div class="platform-card-header">
+                        <span class="icon">🛠️</span>
+                        <div class="img-placeholder platform-image" data-placeholder="Admin Panel">
+                            <img src="images/maid.jpg" alt="Admin backend">
+                        </div>
+                    </div>
                     <h3>Admin Backend</h3>
                     <p>Comprehensive management system for approving workers, handling bookings, managing payments, and ensuring quality.</p>
                 </div>
                 <div class="platform-card">
-                    <span class="icon">📚</span>
+                    <div class="platform-card-header">
+                        <span class="icon">📚</span>
+                        <div class="img-placeholder platform-image" data-placeholder="Training Center">
+                            <img src="images/maid.jpg" alt="Training programs">
+                        </div>
+                    </div>
                     <h3>Trust & Education</h3>
                     <p>Transparent training processes, verification systems, and community guidelines that build trust and safety.</p>
                 </div>
@@ -434,40 +761,236 @@
         </div>
     </section>
 
-    <!-- Key Features -->
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-category">
+                    <div class="service-header">
+                        <span class="service-icon">🏡</span>
+                        <div class="img-placeholder service-image" data-placeholder="Domestic">
+                            <img src="images/maid.jpg" alt="Domestic services">
+                        </div>
+                        <h3>Domestic & Household Services</h3>
+                    </div>
+                    <ul class="service-list">
+                        <li>Full-Time Maids (Live-in / Live-out)</li>
+                        <li>Part-Time Maids / House Cleaners</li>
+                        <li>Nannies / Babysitters</li>
+                        <li>Laundry and Ironing Services</li>
+                        <li>Cooks / Kitchen Assistants</li>
+                    </ul>
+                </div>
+
+                <div class="service-category">
+                    <div class="service-header">
+                        <span class="service-icon">🌱</span>
+                        <div class="img-placeholder service-image" data-placeholder="Garden">
+                            <img src="images/maid.jpg" alt="Garden services">
+                        </div>
+                        <h3>Outdoor & Maintenance Services</h3>
+                    </div>
+                    <ul class="service-list">
+                        <li>Garden Boys / Gardeners</li>
+                        <li>Yard Cleaning & Landscaping</li>
+                        <li>Garbage Disposal / Waste Removal</li>
+                        <li>Pool Cleaning Services</li>
+                    </ul>
+                </div>
+
+                <div class="service-category">
+                    <div class="service-header">
+                        <span class="service-icon">🚚</span>
+                        <div class="img-placeholder service-image" data-placeholder="Moving">
+                            <img src="images/maid.jpg" alt="Moving services">
+                        </div>
+                        <h3>Moving & Transport Services</h3>
+                    </div>
+                    <ul class="service-list">
+                        <li>House/Office Movers</li>
+                        <li>Packing & Unpacking Helpers</li>
+                        <li>Furniture Assembly / Disassembly</li>
+                        <li>Transport Van / Truck Booking</li>
+                    </ul>
+                </div>
+
+                <div class="service-category">
+                    <div class="service-header">
+                        <span class="service-icon">🧰</span>
+                        <div class="img-placeholder service-image" data-placeholder="Handyman">
+                            <img src="images/maid.jpg" alt="Handyman services">
+                        </div>
+                        <h3>Handyman & Technical Support</h3>
+                    </div>
+                    <ul class="service-list">
+                        <li>Plumbers</li>
+                        <li>Electricians</li>
+                        <li>Painters</li>
+                        <li>General Handymen (Repairs & Fixes)</li>
+                        <li>AC & Fridge Technicians</li>
+                    </ul>
+                </div>
+
+                <div class="service-category">
+                    <div class="service-header">
+                        <span class="service-icon">👩‍⚕️</span>
+                        <div class="img-placeholder service-image" data-placeholder="Care">
+                            <img src="images/maid.jpg" alt="Care services">
+                        </div>
+                        <h3>Care Services</h3>
+                    </div>
+                    <ul class="service-list">
+                        <li>Elderly Care Assistants</li>
+                        <li>Disabled Persons Aides</li>
+                        <li>Hospital Care Support</li>
+                    </ul>
+                </div>
+
+                <div class="service-category">
+                    <div class="service-header">
+                        <span class="service-icon">🔧</span>
+                        <div class="img-placeholder service-image" data-placeholder="Cleaning">
+                            <img src="images/maid.jpg" alt="Specialized cleaning">
+                        </div>
+                        <h3>Specialized Cleaning</h3>
+                    </div>
+                    <ul class="service-list">
+                        <li>Post-Renovation Cleaning</li>
+                        <li>Deep Cleaning (Sofas, Carpets, etc.)</li>
+                        <li>Pest Control Services</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="img-placeholder step-image" data-placeholder="Find Local Office">
+                        <img src="images/maid.jpg" alt="Find local office">
+                    </div>
+                    <h4>FIND YOUR LOCAL OFFICE</h4>
+                    <p>We'll match you with one of our trusted house cleaning teams near you. We have nearly 200 locations in the U.S. and across Canada!</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="img-placeholder step-image" data-placeholder="Pick Plan">
+                        <img src="images/maid.jpg" alt="Pick your plan">
+                    </div>
+                    <h4>PICK YOUR PLAN</h4>
+                    <p>Having a clean home means less stress and more moments of joy. Choose from our cleaning plan options and get the maid service that best fits your needs.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="img-placeholder step-image" data-placeholder="Enjoy Clean">
+                        <img src="images/maid.jpg" alt="Enjoy your clean">
+                    </div>
+                    <h4>ENJOY YOUR CLEAN!</h4>
+                    <p>Sit back, relax, and let our team do the work. With The Maids proprietary 22-Step Home Cleaning Process, you can trust you'll get the cleanest home possible, every time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Key Features -->
     <section class="section" id="features">
         <div class="container">
             <h2 class="section-title">Key Website Functionalities</h2>
             <div class="features-grid">
                 <div class="feature-item">
-                    <div class="icon">🔎</div>
-                    <h4>Search & Filter</h4>
-                    <p>Find workers by job type, location, gender, and availability</p>
+                    <div class="feature-header">
+                        <span class="icon">📱</span>
+                        <div class="img-placeholder feature-image" data-placeholder="Mobile App">
+                            <img src="images/maid.jpg" alt="Mobile app interface">
+                        </div>
+                    </div>
+                    <h4>Mobile-First Design</h4>
+                    <p>Optimized for smartphones and tablets with intuitive navigation and quick booking features.</p>
                 </div>
+                
                 <div class="feature-item">
-                    <div class="icon">📅</div>
-                    <h4>Booking Calendar</h4>
-                    <p>Select time and date slots for jobs with real-time availability</p>
+                    <div class="feature-header">
+                        <span class="icon">📍</span>
+                        <div class="img-placeholder feature-image" data-placeholder="GPS Tracking">
+                            <img src="images/maid.jpg" alt="GPS tracking">
+                        </div>
+                    </div>
+                    <h4>Real-Time GPS Tracking</h4>
+                    <p>Track your worker's arrival and progress for complete transparency and peace of mind.</p>
                 </div>
+                
                 <div class="feature-item">
-                    <div class="icon">💬</div>
-                    <h4>Messaging Integration</h4>
-                    <p>WhatsApp button and internal chat for seamless communication</p>
+                    <div class="feature-header">
+                        <span class="icon">🛡️</span>
+                        <div class="img-placeholder feature-image" data-placeholder="Insurance">
+                            <img src="images/maid.jpg" alt="Insurance coverage">
+                        </div>
+                    </div>
+                    <h4>Insurance & Protection</h4>
+                    <p>Full insurance coverage for all services and comprehensive background checks for every worker.</p>
                 </div>
+                
                 <div class="feature-item">
-                    <div class="icon">🧾</div>
+                    <div class="feature-header">
+                        <span class="icon">⭐</span>
+                        <div class="img-placeholder feature-image" data-placeholder="Rating System">
+                            <img src="images/maid.jpg" alt="Rating system">
+                        </div>
+                    </div>
+                    <h4>Rating & Review System</h4>
+                    <p>Rate your experience and read reviews from other customers to make informed decisions.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-header">
+                        <span class="icon">💳</span>
+                        <div class="img-placeholder feature-image" data-placeholder="Payment">
+                            <img src="images/maid.jpg" alt="Payment system">
+                        </div>
+                    </div>
                     <h4>Secure Payments</h4>
-                    <p>Mobile Money integration with Mpamba and Airtel Money</p>
+                    <p>Multiple payment options including mobile money, cards, and cash with secure processing.</p>
                 </div>
+                
                 <div class="feature-item">
-                    <div class="icon">📱</div>
-                    <h4>Mobile Optimized</h4>
-                    <p>100% mobile-first design for the Malawian market</p>
+                    <div class="feature-header">
+                        <span class="icon">🎓</span>
+                        <div class="img-placeholder feature-image" data-placeholder="Training">
+                            <img src="images/maid.jpg" alt="Training programs">
+                        </div>
+                    </div>
+                    <h4>Training Programs</h4>
+                    <p>Comprehensive training modules for workers to enhance skills and service quality.</p>
                 </div>
+                
                 <div class="feature-item">
-                    <div class="icon">🌐</div>
-                    <h4>Multi-language</h4>
-                    <p>Chichewa and English toggle for wider accessibility</p>
+                    <div class="feature-header">
+                        <span class="icon">🤝</span>
+                        <div class="img-placeholder feature-image" data-placeholder="Worker Relations">
+                            <img src="images/maid.jpg" alt="Worker relations">
+                        </div>
+                    </div>
+                    <h4>Worker-Client Relations</h4>
+                    <p>Built-in communication tools and dispute resolution system for smooth interactions.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-header">
+                        <span class="icon">📊</span>
+                        <div class="img-placeholder feature-image" data-placeholder="Analytics">
+                            <img src="images/maid.jpg" alt="Analytics dashboard">
+                        </div>
+                    </div>
+                    <h4>Analytics Dashboard</h4>
+                    <p>Comprehensive reporting and analytics for businesses and power users.</p>
                 </div>
             </div>
         </div>
@@ -476,74 +999,308 @@
     <!-- User Journey -->
     <section class="section" id="journey">
         <div class="container">
-            <h2 class="section-title">User Journey Examples</h2>
+            <h2 class="section-title">Your Journey With Us</h2>
             <div class="journey-container">
                 <div class="journey-card">
-                    <h3>👥 Client Journey</h3>
+                    <div class="journey-header">
+                        <div class="img-placeholder journey-image" data-placeholder="Client Journey">
+                            <img src="images/maid.jpg" alt="Client using app">
+                        </div>
+                        <h3>For Clients</h3>
+                    </div>
                     <ol class="journey-steps">
-                        <li>Visits pakhomojobs.com</li>
-                        <li>Clicks "Hire a Maid"</li>
-                        <li>Selects service, enters date/time/location</li>
-                        <li>Chooses from 3 nearby verified workers</li>
-                        <li>Confirms job and pays deposit</li>
-                        <li>Worker arrives → job completed → payment sent</li>
+                        <li>Sign up and verify your account</li>
+                        <li>Browse available services in your area</li>
+                        <li>Select a verified worker and book</li>
+                        <li>Track arrival and service progress</li>
+                        <li>Rate your experience and pay securely</li>
                     </ol>
                 </div>
+                
                 <div class="journey-card">
-                    <h3>👷‍♀️ Worker Journey</h3>
+                    <div class="journey-header">
+                        <div class="img-placeholder journey-image" data-placeholder="Worker Journey">
+                            <img src="images/maid.jpg" alt="Worker using app">
+                        </div>
+                        <h3>For Workers</h3>
+                    </div>
                     <ol class="journey-steps">
-                        <li>Signs up via "Join as Worker"</li>
-                        <li>Submits ID and chooses job category</li>
-                        <li>Gets invited to training or materials</li>
-                        <li>Receives first job via SMS/WhatsApp</li>
-                        <li>Completes job → gets rating → earns money</li>
-                        <li>Builds reputation and gets more opportunities</li>
+                        <li>Apply and complete verification process</li>
+                        <li>Complete mandatory training modules</li>
+                        <li>Get approved and start receiving jobs</li>
+                        <li>Build your reputation through ratings</li>
+                        <li>Earn fair wages with flexible scheduling</li>
                     </ol>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack -->
+    <!-- About/Trust Section -->
+    <section class="section" id="trust">
+        <div class="container">
+            <h2 class="section-title">Why Trust Pakhomo Jobs?</h2>
+            <div class="trust-features">
+                <div class="trust-item">
+                    <span class="trust-icon">✅</span>
+                    <div class="img-placeholder trust-image" data-placeholder="Background Check">
+                        <img src="images/maid.jpg" alt="Background verification">
+                    </div>
+                    <h4>Thorough Background Checks</h4>
+                    <p>Every worker undergoes comprehensive background verification including criminal record checks and reference validation.</p>
+                </div>
+                
+                <div class="trust-item">
+                    <span class="trust-icon">🎓</span>
+                    <div class="img-placeholder trust-image" data-placeholder="Training Certificate">
+                        <img src="images/maid.jpg" alt="Training certification">
+                    </div>
+                    <h4>Certified Training Programs</h4>
+                    <p>All workers complete mandatory training modules covering safety protocols, customer service, and technical skills.</p>
+                </div>
+                
+                <div class="trust-item">
+                    <span class="trust-icon">🛡️</span>
+                    <div class="img-placeholder trust-image" data-placeholder="Insurance Policy">
+                        <img src="images/maid.jpg" alt="Insurance documentation">
+                    </div>
+                    <h4>Full Insurance Coverage</h4>
+                    <p>Comprehensive liability insurance protects both clients and workers for all services performed through our platform.</p>
+                </div>
+                
+                <div class="trust-item">
+                    <span class="trust-icon">📞</span>
+                    <div class="img-placeholder trust-image" data-placeholder="24/7 Support">
+                        <img src="images/maid.jpg" alt="Customer support">
+                    </div>
+                    <h4>24/7 Customer Support</h4>
+                    <p>Round-the-clock support team available to resolve issues and provide assistance whenever you need it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Community Says</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="img-placeholder testimonial-avatar" data-placeholder="Mrs. Banda">
+                            <img src="images/maid.jpg" alt="Mrs. Banda">
+                        </div>
+                        <div class="testimonial-info">
+                            <h5>Mrs. Grace Banda</h5>
+                            <p>Lilongwe Resident</p>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Pakhomo Jobs connected me with Mary, the most reliable maid I've ever had. The platform made it so easy to find someone trustworthy for my family."</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="img-placeholder testimonial-avatar" data-placeholder="John Phiri">
+                            <img src="images/maid.jpg" alt="John Phiri">
+                        </div>
+                        <div class="testimonial-info">
+                            <h5>John Phiri</h5>
+                            <p>Restaurant Owner</p>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Finding quality waiters was always a challenge until I discovered Pakhomo Jobs. The training program ensures our customers receive excellent service."</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="img-placeholder testimonial-avatar" data-placeholder="Sarah Mwale">
+                            <img src="images/maid.jpg" alt="Sarah Mwale">
+                        </div>
+                        <div class="testimonial-info">
+                            <h5>Sarah Mwale</h5>
+                            <p>Domestic Worker</p>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"This platform changed my life. I now have steady work, fair wages, and the training helped me improve my skills. Thank you Pakhomo Jobs!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="img-placeholder testimonial-avatar" data-placeholder="Dr. Nyasulu">
+                            <img src="images/maid.jpg" alt="Dr. Nyasulu">
+                        </div>
+                        <div class="testimonial-info">
+                            <h5>Dr. Chisomo Nyasulu</h5>
+                            <p>Healthcare Professional</p>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"As a busy doctor, I needed reliable help at home. The background checks and insurance gave me peace of mind. Highly recommended!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="img-placeholder testimonial-avatar" data-placeholder="James Kamoto">
+                            <img src="images/maid.jpg" alt="James Kamoto">
+                        </div>
+                        <div class="testimonial-info">
+                            <h5>James Kamoto</h5>
+                            <p>Handyman</p>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Being part of Pakhomo Jobs network opened up so many opportunities. The fair payment system and respect for workers makes all the difference."</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="img-placeholder testimonial-avatar" data-placeholder="Mrs. Chimwemwe">
+                            <img src="images/maid.jpg" alt="Mrs. Chimwemwe">
+                        </div>
+                        <div class="testimonial-info">
+                            <h5>Mrs. Chimwemwe Mhango</h5>
+                            <p>Lodge Owner</p>
+                            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"For our lodge business, finding trained hospitality staff was crucial. Pakhomo Jobs delivered exactly what we needed - professional and reliable workers."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
     <section class="section" id="tech">
         <div class="container">
-            <h2 class="section-title">Recommended Tech Stack</h2>
+            <h2 class="section-title">Built With Modern Technology</h2>
+            <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem;">
+                Our platform leverages cutting-edge technology to deliver a seamless, secure, and scalable experience for all users.
+            </p>
             <div class="tech-grid">
-                <div class="tech-item">Frontend: React/Next.js</div>
-                <div class="tech-item">Backend: Firebase/Node.js</div>
-                <div class="tech-item">Database: Firestore/MongoDB</div>
-                <div class="tech-item">Hosting: Vercel/Firebase</div>
-                <div class="tech-item">Payments: Mpamba/Airtel Money</div>
-                <div class="tech-item">Future: Stripe Integration</div>
+                <div class="tech-item">React Native</div>
+                <div class="tech-item">Node.js</div>
+                <div class="tech-item">MongoDB</div>
+                <div class="tech-item">GPS Integration</div>
+                <div class="tech-item">Payment Gateway</div>
+                <div class="tech-item">Cloud Hosting</div>
+                <div class="tech-item">SSL Security</div>
+                <div class="tech-item">Real-time Chat</div>
             </div>
         </div>
     </section>
 
-    <!-- Goals -->
+    <!-- Goals & Vision -->
     <section class="section" id="goals">
         <div class="container">
-            <h2 class="section-title">Website Goals</h2>
+            <h2 class="section-title">Our Vision & Goals</h2>
             <div class="goals-grid">
                 <div class="goal-item">
-                    <div class="icon">🎯</div>
-                    <h4>Easy Access to Trusted Help</h4>
-                    <p>Simplify the process of finding reliable domestic and hospitality workers</p>
+                    <div class="goal-header">
+                        <span class="icon">🎯</span>
+                        <div class="img-placeholder goal-image" data-placeholder="Market Leader">
+                            <img src="images/maid.jpg" alt="Market leadership">
+                        </div>
+                    </div>
+                    <h4>Become Malawi's #1 Domestic Services Platform</h4>
+                    <p>Establish ourselves as the most trusted and widely-used platform for domestic and hospitality services across all major cities in Malawi.</p>
                 </div>
+                
                 <div class="goal-item">
-                    <div class="icon">💼</div>
-                    <h4>Dignified Job Creation</h4>
-                    <p>Create safe, respectful employment opportunities for informal workers</p>
+                    <div class="goal-header">
+                        <span class="icon">👥</span>
+                        <div class="img-placeholder goal-image" data-placeholder="Job Creation">
+                            <img src="images/maid.jpg" alt="Job creation">
+                        </div>
+                    </div>
+                    <h4>Create 10,000 Job Opportunities</h4>
+                    <p>Provide sustainable employment opportunities for domestic workers, contributing to poverty reduction and economic empowerment.</p>
                 </div>
+                
                 <div class="goal-item">
-                    <div class="icon">⚡</div>
-                    <h4>Streamlined Operations</h4>
-                    <p>Efficient payments, training programs, and feedback systems</p>
+                    <div class="goal-header">
+                        <span class="icon">📚</span>
+                        <div class="img-placeholder goal-image" data-placeholder="Skills Development">
+                            <img src="images/maid.jpg" alt="Skills training">
+                        </div>
+                    </div>
+                    <h4>Skills Development & Training</h4>
+                    <p>Establish comprehensive training programs that enhance worker skills, professionalism, and earning potential in domestic services.</p>
                 </div>
+                
                 <div class="goal-item">
-                    <div class="icon">🚀</div>
-                    <h4>Scalable Marketplace</h4>
-                    <p>Build a service platform rooted in Malawian needs with national growth potential</p>
+                    <div class="goal-header">
+                        <span class="icon">🌍</span>
+                        <div class="img-placeholder goal-image" data-placeholder="Regional Expansion">
+                            <img src="images/maid.jpg" alt="Regional expansion">
+                        </div>
+                    </div>
+                    <h4>Regional Expansion</h4>
+                    <p>Expand our services to neighboring countries, becoming the leading domestic services platform in Southern Africa.</p>
                 </div>
+                
+                <div class="goal-item">
+                    <div class="goal-header">
+                        <span class="icon">🤝</span>
+                        <div class="img-placeholder goal-image" data-placeholder="Community Impact">
+                            <img src="images/maid.jpg" alt="Community impact">
+                        </div>
+                    </div>
+                    <h4>Positive Community Impact</h4>
+                    <p>Build stronger communities by connecting neighbors, promoting local employment, and raising standards in domestic services.</p>
+                </div>
+                
+                <div class="goal-item">
+                    <div class="goal-header">
+                        <span class="icon">💡</span>
+                        <div class="img-placeholder goal-image" data-placeholder="Innovation">
+                            <img src="images/maid.jpg" alt="Innovation">
+                        </div>
+                    </div>
+                    <h4>Continuous Innovation</h4>
+                    <p>Stay at the forefront of technology, continuously improving our platform to better serve both workers and clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="section" id="blog">
+        <div class="container">
+            <h2 class="section-title">Latest From Our Blog</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="img-placeholder" style="width: 100%; height: 200px; margin-bottom: 1rem;" data-placeholder="Blog Post Image">
+                        <img src="images/maid.jpg" alt="Cleaning tips blog post">
+                    </div>
+                    <h4>10 Essential Cleaning Tips for Busy Households</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">Learn time-saving cleaning techniques that will keep your home spotless even with a hectic schedule...</p>
+                    <p style="color: #999; font-size: 0.9rem;">Published 2 days ago</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="img-placeholder" style="width: 100%; height: 200px; margin-bottom: 1rem;" data-placeholder="Worker Success Story">
+                        <img src="images/maid.jpg" alt="Worker success story">
+                    </div>
+                    <h4>Success Story: How Mary Built Her Cleaning Business</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">From unemployed single mother to successful entrepreneur - Mary's inspiring journey through Pakhomo Jobs...</p>
+                    <p style="color: #999; font-size: 0.9rem;">Published 5 days ago</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="img-placeholder" style="width: 100%; height: 200px; margin-bottom: 1rem;" data-placeholder="Safety Guidelines">
+                        <img src="images/maid.jpg" alt="Safety guidelines">
+                    </div>
+                    <h4>Safety First: Guidelines for Home Service Workers</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">Important safety protocols and best practices to ensure secure interactions for both workers and clients...</p>
+                    <p style="color: #999; font-size: 0.9rem;">Published 1 week ago</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#" class="btn btn-primary">View All Blog Posts</a>
             </div>
         </div>
     </section>
@@ -554,60 +1311,47 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>🏠 Pakhomo Jobs</h4>
-                    <p>Connecting trusted workers with families and businesses across Malawi.</p>
+                    <p>Trusted Help. Right at Your Doorstep.</p>
+                    <p>Connecting skilled workers with households and businesses across Malawi.</p>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <p>Find Help • Join as Worker • How It Works • Contact Us</p>
+                    <h4>Services</h4>
+                    <p>Domestic & Household</p>
+                    <p>Outdoor & Maintenance</p>
+                    <p>Moving & Transport</p>
+                    <p>Handyman Services</p>
+                    <p>Care Services</p>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>📍 Blantyre, Malawi<br>📱 WhatsApp Support<br>📧 info@pakhomojobs.com</p>
+                    <h4>Support</h4>
+                    <p>Help Center</p>
+                    <p>Safety Guidelines</p>
+                    <p>Insurance Info</p>
+                    <p>Contact Us</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <p>About Us</p>
+                    <p>Careers</p>
+                    <p>Blog</p>
+                    <p>Privacy Policy</p>
+                    <p>Terms of Service</p>
                 </div>
             </div>
-            <p>&copy; 2025 Pakhomo Jobs. Trusted Help. Right at Your Doorstep.</p>
+            
+            <div style="border-top: 1px solid #555; padding-top: 2rem; margin-top: 2rem;">
+                <p>&copy; 2024 Pakhomo Jobs. All rights reserved. Made with ❤️ in Malawi.</p>
+            </div>
         </div>
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/265" class="whatsapp-btn" title="WhatsApp Support">📱</a>
+    <a href="https://wa.me/265888123456" class="whatsapp-btn" target="_blank">
+        📱
+    </a>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to header
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-
-        // Add click handlers for CTA buttons
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (this.textContent.includes('Find Help')) {
-                    alert('🎉 Ready to launch! This would redirect to the booking form.');
-                } else if (this.textContent.includes('Join as Worker')) {
-                    alert('👷‍♀️ Worker registration coming soon! This would open the worker sign-up form.');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
