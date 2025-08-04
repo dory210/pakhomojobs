@@ -436,7 +436,7 @@
         </div>
         
         <div class="form-container">
-            <form id="bookingForm" action="https://formspree.io/f/23be1d94-71f1-4fc6-9b54-6f9f494b3522" method="POST">
+            <form id="bookingForm" action="https://formspree.io/f/xvgqbeyq" method="POST">
             <!-- Step 1: Service Selection -->
             <div class="form-step active" id="step1">
                 <h2 class="step-title">What service do you need?</h2>
@@ -656,13 +656,15 @@
             <!-- Success Step -->
             <div class="form-step" id="stepSuccess">
                 <div class="success-message">
-                    <div class="success-icon">🎉</div>
+                    <div class="success-icon">✓</div>
                     <h2>Booking Request Sent!</h2>
-                    <p>Thank you! Your booking details have been sent. For a faster response and to confirm your booking, please message us on WhatsApp.</p>
-                    <button type="button" class="btn btn-primary" onclick="generateWhatsAppMessage()" style="margin-top: 1rem; background: #25D366;">
-                        <svg style="width:20px; height:20px; fill:white; margin-right: 8px;" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.61 15.35 3.48 16.84L2 22L7.32 20.55C8.77 21.33 10.37 21.8 12.04 21.8C17.5 21.8 21.95 17.35 21.95 11.91C21.95 6.45 17.5 2 12.04 2M12.04 20.13C10.56 20.13 9.12 19.7 7.89 18.9L7.5 18.68L4.32 19.53L5.19 16.41L4.95 16.02C4.1 14.68 3.63 13.13 3.63 11.91C3.63 7.33 7.41 3.55 12.04 3.55C16.67 3.55 20.45 7.33 20.45 11.91C20.45 16.49 16.67 20.13 12.04 20.13M17.46 14.47C17.23 14.36 16.13 13.85 15.91 13.77C15.69 13.68 15.53 13.64 15.38 13.86C15.23 14.08 14.76 14.64 14.61 14.82C14.46 14.99 14.31 15.01 14.06 14.92C13.81 14.84 12.9 14.54 11.82 13.63C11.01 12.93 10.45 12.12 10.3 11.87C10.16 11.62 10.26 11.5 10.38 11.38C10.49 11.27 10.62 11.11 10.74 10.96C10.86 10.82 10.91 10.7 11 10.53C11.09 10.36 11.04 10.21 10.97 10.09C10.9 9.97 10.35 8.61 10.13 8.09C9.92 7.57 9.7 7.64 9.56 7.63C9.41 7.63 9.26 7.63 9.11 7.63C8.96 7.63 8.7 7.69 8.48 7.91C8.26 8.13 7.79 8.56 7.79 9.61C7.79 10.66 8.51 11.66 8.63 11.83C8.75 12 10.16 14.16 12.21 15.06C12.94 15.37 13.48 15.52 13.89 15.63C14.53 15.79 15.09 15.75 15.51 15.66C15.98 15.56 17.03 15.01 17.23 14.9C17.43 14.78 17.43 14.67 17.46 14.47Z"></path></svg>
-                        Message us on WhatsApp
-                    </button>
+                    <p>Thank you! We've received your request and will contact you soon to confirm.</p>
+                    <div class="success-actions" style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem;">
+                        <button type="button" class="btn btn-secondary" onclick="location.href='index.html'">← Back to Home</button>
+                        <button type="button" class="btn btn-primary" id="whatsappBtn" onclick="sendWhatsAppMessage()">
+                            Send a Copy via WhatsApp
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -927,7 +929,7 @@
             if (formData.specialRequirements && formData.specialRequirements.length > 0) {
                 summaryHTML += `<div class="summary-item"><span>Special Requirements:</span><span>${formatSpecialRequirements(formData.specialRequirements)}</span></div>`;
             }
-            summaryContainer.innerHTML = summaryHTML;
+            summaryContent.innerHTML = summaryHTML;
 
             const prices = priceEstimates[formData.selectedService];
             let priceText = `MWK ${prices.min.toLocaleString()} - ${prices.max.toLocaleString()}`;
@@ -971,24 +973,67 @@
         }
 
         function submitForm() {
+            const form = document.getElementById('bookingForm');
             const nextBtn = document.getElementById('nextBtn');
             const loadingSpinner = document.getElementById('loadingSpinner');
+
             nextBtn.disabled = true;
-            nextBtn.innerHTML = 'Submitting... <span class="loading-spinner"></span>';
-            loadingSpinner.style.display = 'inline-block';
+            // Update button text safely
+            for (const node of nextBtn.childNodes) {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+                    node.textContent = 'Submitting... ';
+                    break;
+                }
+            }
+            if (loadingSpinner) loadingSpinner.style.display = 'inline-block';
 
             saveCurrentStepData();
+            const data = new FormData(form);
+            
+            // Append our formData object to the submission
+            for (const key in formData) {
+                data.append(key, formData[key]);
+            }
 
-            setTimeout(() => {
-                const whatsappMessage = generateWhatsAppMessage();
-                const encodedMessage = encodeURIComponent(whatsappMessage);
-                const whatsappUrl = `https://wa.me/265988114909?text=${encodedMessage}`;
-                window.open(whatsappUrl, '_blank');
+            fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    currentStep++;
+                    showStep(currentStep); // Show success screen
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert('Oops! There was a problem submitting your form.');
+                        }
+                    });
+                }
+            }).catch(error => {
+                alert('An error occurred. Please try again.');
+            }).finally(() => {
+                // Reset button state in case of error
+                nextBtn.disabled = false;
+                for (const node of nextBtn.childNodes) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        node.textContent = 'Confirm & Book Now';
+                        break;
+                    }
+                }
+                if (loadingSpinner) loadingSpinner.style.display = 'none';
+            });
+        }
 
-                currentStep++;
-                showStep(currentStep);
-                loadingSpinner.style.display = 'none';
-            }, 1500);
+        function sendWhatsAppMessage() {
+            const whatsappMessage = generateWhatsAppMessage();
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappUrl = `https://wa.me/265988114909?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         function autoSave() {
