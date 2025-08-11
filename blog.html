@@ -90,6 +90,7 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="css/blog.css">
+    <link rel="manifest" href="/pakhomojobs/manifest.json">
 </head>
 
 <body>
@@ -290,3 +291,19 @@
         </div>
     </div>
 </section>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/pakhomojobs/sw.js')
+                .then(function(registration) {
+                    console.log('SW registered: ', registration);
+                })
+                .catch(function(registrationError) {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        });
+    }
+</script>
+</body>
+</html>

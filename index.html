@@ -867,7 +867,7 @@
             }
         }
     </style>
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/pakhomojobs/manifest.json">
 </head>
 <body>
     <!-- Header -->
@@ -1576,7 +1576,7 @@
         // Service Worker Registration (if you plan to make this a PWA)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('/pakhomojobs/sw.js')
                     .then(function(registration) {
                         console.log('SW registered: ', registration);
                     })

@@ -731,6 +731,20 @@
             }
         }
     </style>
+    <link rel="manifest" href="/pakhomojobs/manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/pakhomojobs/sw.js').then(function(registration) {
+                    console.log('Service worker registered:', registration);
+                }).catch(function(registrationError) {
+                    console.error('Service worker registration failed:', registrationError);
+                });
+            });
+        } else {
+            console.error('Service workers are not supported.');
+        }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -1312,6 +1326,19 @@
                 this.style.boxShadow = 'none';
             });
         });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/pakhomojobs/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
     </script>
 </body>
 </html>

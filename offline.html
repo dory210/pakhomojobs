@@ -397,6 +397,7 @@
             }
         }
     </style>
+    <link rel="manifest" href="/pakhomojobs/manifest.json">
 </head>
 <body>
     <!-- Floating Background Shapes -->
@@ -592,6 +593,19 @@
             }
         `;
         document.head.appendChild(style);
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/pakhomojobs/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
     </script>
 </body>
 </html>

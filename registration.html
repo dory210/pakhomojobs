@@ -287,6 +287,7 @@
             display: block;
         }
     </style>
+    <link rel="manifest" href="/pakhomojobs/manifest.json">
 </head>
 <body>
     <div class="container">
@@ -687,6 +688,19 @@
 
         // Initialize form
         updateFormDisplay();
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/pakhomojobs/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration); 
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
