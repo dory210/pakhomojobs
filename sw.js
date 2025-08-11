@@ -1,17 +1,18 @@
-const CACHE_NAME = 'pakhomo-jobs-cache-v2'; // Updated cache name
+const CACHE_NAME = 'pakhomo-jobs-cache-v3'; // Updated cache name to force update
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/blog.html',
-  '/bookingform.html',
-  '/registration.html',
-  '/dashboard.html',
-  '/css/blog.css',
-  '/src/styles/globals.css',
-  '/offline.html' // Added offline page
+  '/pakhomojobs/',
+  '/pakhomojobs/index.html',
+  '/pakhomojobs/blog.html',
+  '/pakhomojobs/bookingform.html',
+  '/pakhomojobs/registration.html',
+  '/pakhomojobs/dashboard.html',
+  '/pakhomojobs/css/blog.css',
+  '/pakhomojobs/src/styles/globals.css',
+  '/pakhomojobs/offline.html'
 ];
 
 self.addEventListener('install', event => {
+  self.skipWaiting(); // Force the new service worker to activate
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -23,17 +24,20 @@ self.addEventListener('install', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(
-    fetch(event.request).catch(() => {
-      return caches.match(event.request).then(response => {
+    caches.match(event.request)
+      .then(response => {
+        // Cache hit - return response
         if (response) {
           return response;
         }
-        // If the request is for a page, show the offline page.
-        if (event.request.mode === 'navigate') {
-          return caches.match('/offline.html');
-        }
-      });
-    })
+        return fetch(event.request).catch(() => {
+          // Fetch failed, and it's not in cache. 
+          // If it's a navigation request, show the offline page.
+          if (event.request.mode === 'navigate') {
+            return caches.match('/pakhomojobs/offline.html');
+          }
+        });
+      })
   );
 });
 
