@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Pakhomo Jobs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .offline-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .offline-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+
+        .offline-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .offline-title {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .offline-message {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .offline-features {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .offline-features h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .features-list {
+            text-align: left;
+            list-style: none;
+            color: #555;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .features-list li::before {
+            content: "📱";
+            font-size: 1.2rem;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .contact-info h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .retry-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .retry-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .retry-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .retry-btn:active {
+            transform: scale(0.95);
+        }
+
+        .connection-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            padding: 0.8rem;
+            background: rgba(255, 87, 87, 0.1);
+            border-radius: 10px;
+            color: #ff5757;
+            font-weight: 600;
+        }
+
+        .connection-status.online {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff5757;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .status-indicator.online {
+            background: #22c55e;
+        }
+
+        .tips-section {
+            text-align: left;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 193, 7, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips-section h4 {
+            color: #f59e0b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tips-list {
+            list-style: none;
+            color: #666;
+        }
+
+        .tips-list li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .tips-list li::before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape1 {
+            top: 10%;
+            left: 10%;
+            width: 60px;
+            height: 60px;
+            background: #667eea;
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            top: 70%;
+            right: 10%;
+            width: 40px;
+            height: 40px;
+            background: #764ba2;
+            border-radius: 50%;
+            animation-delay: 2s;
+        }
+
+        .shape3 {
+            bottom: 20%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background: #667eea;
+            border-radius: 30%;
+            animation-delay: 4s;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .offline-card {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .offline-title {
+                font-size: 1.8rem;
+            }
+
+            .offline-icon {
+                font-size: 3rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <div class="container">
+        <div class="offline-card">
+            <div class="offline-content">
+                <!-- Logo -->
+                <div class="logo">🏠 Pakhomo Jobs</div>
+                
+                <!-- Offline Icon -->
+                <span class="offline-icon">📡</span>
+                
+                <!-- Main Message -->
+                <h1 class="offline-title">You're Currently Offline</h1>
+                <p class="offline-message">
+                    Don't worry! Some features are still available while you're offline. 
+                    Check your internet connection and try again.
+                </p>
+
+                <!-- Connection Status -->
+                <div class="connection-status" id="connectionStatus">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">No Internet Connection</span>
+                </div>
+
+                <!-- Retry Button -->
+                <button class="retry-btn" onclick="checkConnection()">
+                    🔄 Try Again
+                </button>
+
+                <!-- Available Offline Features -->
+                <div class="offline-features">
+                    <h4>📱 What You Can Still Do:</h4>
+                    <ul class="features-list">
+                        <li>View your cached service history</li>
+                        <li>Browse previously loaded content</li>
+                        <li>Access saved contact information</li>
+                        <li>Review offline help resources</li>
+                    </ul>
+                </div>
+
+                <!-- Emergency Contact -->
+                <div class="contact-info">
+                    <h4>📞 Need Immediate Help?</h4>
+                    <p style="margin-bottom: 1rem; opacity: 0.9;">
+                        Contact us directly even without internet:
+                    </p>
+                    <div class="contact-links">
+                        <a href="tel:+265988114909" class="contact-btn">📞 Call Now</a>
+                        <a href="sms:+265988114909" class="contact-btn">💬 SMS</a>
+                    </div>
+                </div>
+
+                <!-- Tips Section -->
+                <div class="tips-section">
+                    <h4>🔧 Connection Troubleshooting:</h4>
+                    <ul class="tips-list">
+                        <li>Check if your WiFi or mobile data is turned on</li>
+                        <li>Move to an area with better signal strength</li>
+                        <li>Restart your router or mobile data</li>
+                        <li>Try switching between WiFi and mobile data</li>
+                        <li>Close and reopen your browser/app</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check connection status
+        function updateConnectionStatus() {
+            const status = navigator.onLine;
+            const statusElement = document.getElementById('connectionStatus');
+            const indicatorElement = document.getElementById('statusIndicator');
+            const textElement = document.getElementById('statusText');
+            
+            if (status) {
+                statusElement.classList.add('online');
+                indicatorElement.classList.add('online');
+                textElement.textContent = 'Connection Restored!';
+                
+                // Auto-redirect after showing success message
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                statusElement.classList.remove('online');
+                indicatorElement.classList.remove('online');
+                textElement.textContent = 'No Internet Connection';
+            }
+        }
+
+        // Manual connection check
+        function checkConnection() {
+            const button = document.querySelector('.retry-btn');
+            button.innerHTML = '🔄 Checking...';
+            button.disabled = true;
+            
+            // Simulate checking process
+            setTimeout(() => {
+                updateConnectionStatus();
+                if (!navigator.onLine) {
+                    button.innerHTML = '🔄 Try Again';
+                    button.disabled = false;
+                } else {
+                    button.innerHTML = '✅ Connected!';
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                }
+            }, 1500);
+        }
+
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+
+        // Initial status check
+        updateConnectionStatus();
+
+        // Periodic connection check (every 30 seconds)
+        setInterval(() => {
+            // Only check if currently offline
+            if (!navigator.onLine) {
+                // Try to fetch a small resource to test connectivity
+                fetch('index.html', { 
+                    method: 'HEAD', 
+                    mode: 'no-cors',
+                    cache: 'no-cache'
+                })
+                .then(() => {
+                    // If successful, connection is restored
+                    updateConnectionStatus();
+                })
+                .catch(() => {
+                    // Still offline, do nothing
+                });
+            }
+        }, 30000);
+
+        // Add some interactive effects
+        document.querySelector('.retry-btn').addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+
+        document.querySelector('.retry-btn').addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+
+        // Add ripple effect to contact buttons
+        document.querySelectorAll('.contact-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

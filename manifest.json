@@ -1,0 +1,20 @@
+{
+  "name": "Pakhomo Jobs",
+  "short_name": "Pakhomo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#002855",
+  "icons": [
+    {
+      "src": "images/pakhomo-jobs.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/pakhomo-jobs.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
